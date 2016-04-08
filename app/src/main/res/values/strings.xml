@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PicturePurrfect</string>
+    <string name="take_pic_button">Take New Picture</string>
+    <string name="existing_pic_button">Open Existing Picture</string>
+</resources>
