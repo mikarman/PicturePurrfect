@@ -2,18 +2,14 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -38,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         PackageManager packageManager = getPackageManager();
         mFile = new FileMetadata();
-        mPhotoFile = FileLab.get(this).getPhotoFile(mFile);
+        mPhotoFile = Picture.get(this).getPhotoFile(mFile);
 
         mTakePhotoButton = (Button) findViewById(R.id.TakePicture);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
