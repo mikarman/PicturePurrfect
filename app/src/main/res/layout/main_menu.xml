@@ -13,17 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/TakePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/take_pic_button"/>
+        android:text="@string/take_pic_button"
+        android:background="#00000000"
+        android:layout_marginBottom="10dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/OpenExisting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/existing_pic_button"/>
+        android:text="@string/existing_pic_button"
+        android:background="#00000000"/>
 
 
 </LinearLayout>

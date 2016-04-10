@@ -2,14 +2,19 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -18,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_PHOTO = 0;
 
-    private Button mTakePhotoButton;
-    private Button mExistingPhotoButton;
+    private ImageButton mTakePhotoButton;
+    private ImageButton mExistingPhotoButton;
     private File mPhotoFile;
     private FileMetadata mFile;
     private ImageView mTitle;
@@ -36,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         mFile = new FileMetadata();
         mPhotoFile = Picture.get(this).getPhotoFile(mFile);
 
-        mTakePhotoButton = (Button) findViewById(R.id.TakePicture);
+        mTakePhotoButton = (ImageButton) findViewById(R.id.TakePicture);
+        mTakePhotoButton.setImageResource(R.drawable.gallery);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         boolean canTakePhoto = mPhotoFile != null &&
@@ -55,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        mExistingPhotoButton = (Button) findViewById(R.id.OpenExisting);
+        mExistingPhotoButton = (ImageButton) findViewById(R.id.OpenExisting);
+        mExistingPhotoButton.setImageResource(R.drawable.new_pic);
     }
 
     @Override
