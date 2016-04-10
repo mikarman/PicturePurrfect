@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Michael Karman on 4/8/2016.
- */
+
 public class EditorImageFragment extends Fragment {
     private static final String TAG = "EditorImageFragment";
 
@@ -31,3 +31,4 @@ public class EditorImageFragment extends Fragment {
     }
 
 }
+ */
