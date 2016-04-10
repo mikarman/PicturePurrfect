@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         mExistingPhotoButton = (Button) findViewById(R.id.OpenExisting);
+
     }
 
     @Override
@@ -77,5 +78,17 @@ public class MainActivity extends AppCompatActivity {
             mTitle.setImageBitmap(bitmap);
         }
         */
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == REQUEST_PHOTO) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                Uri photo = data.getData();
+                // TODO: Call editor activity
+            }
+        }
     }
 }

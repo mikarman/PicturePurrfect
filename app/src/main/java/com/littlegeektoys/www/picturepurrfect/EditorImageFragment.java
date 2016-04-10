@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Michael Karman on 4/8/2016.
+ * Fragment for image editor (canvas)
  */
 public class EditorImageFragment extends Fragment {
     private static final String TAG = "EditorImageFragment";
@@ -25,7 +26,7 @@ public class EditorImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() called");
 
-        View v = inflater.inflate(R.layout.???, container, false);
+        View v = inflater.inflate(R.layout.image_editor_fragment, container, false);
 
         return v;
     }
