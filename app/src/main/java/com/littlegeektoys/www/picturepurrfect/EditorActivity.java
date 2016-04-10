@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 public class EditorActivity extends AppCompatActivity {
 
     @LayoutRes
-    protected int getLayoutResId() { return R.layout.editor_fragment_container};
+    protected int getLayoutResId() { return R.layout.editor_fragment_container; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
