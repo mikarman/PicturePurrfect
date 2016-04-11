@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         mExistingPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Toast", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("content://media/internal/images/media"));
+                startActivity(intent);
             }
 
         });
