@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         mExistingPhotoButton = (Button) findViewById(R.id.OpenExisting);
 
     }
@@ -82,12 +83,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // super.onActivityResult(requestCode, resultCode, data);
         // Check which request we're responding to
+        // Request Code from Camera
         if (requestCode == REQUEST_PHOTO) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Uri photo = data.getData();
-                // TODO: Call editor activity
+                Uri photo = Uri.fromFile(mPhotoFile);
+                // Make intent to start EditorActivity with the photo Uri that we got from camera
+                Intent intent = EditorActivity.newIntent(this, photo);
+                startActivity(intent);
             }
         }
     }
