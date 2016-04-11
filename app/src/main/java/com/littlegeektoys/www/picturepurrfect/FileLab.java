@@ -8,19 +8,19 @@ import java.io.File;
 /**
  * Created by Michael Karman on 4/8/2016.
  */
-public class Picture {
+public class FileLab {
 
-    private static Picture sPicture;
+    private static FileLab sPicture;
     private Context mContext;
 
-    public static Picture get(Context context) {
+    public static FileLab get(Context context) {
         if (sPicture == null) {
-            sPicture = new Picture(context);
+            sPicture = new FileLab(context);
         }
         return sPicture;
     }
 
-    private Picture(Context context) {
+    private FileLab(Context context) {
         mContext = context.getApplicationContext();
     }
 
