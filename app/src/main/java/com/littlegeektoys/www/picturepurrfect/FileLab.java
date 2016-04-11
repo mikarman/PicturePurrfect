@@ -4,21 +4,20 @@ import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
-import java.util.UUID;
 
 /**
  * Created by Michael Karman on 4/8/2016.
  */
 public class FileLab {
 
-    private static FileLab sFileLab;
+    private static FileLab sPicture;
     private Context mContext;
 
     public static FileLab get(Context context) {
-        if (sFileLab == null) {
-            sFileLab = new FileLab(context);
+        if (sPicture == null) {
+            sPicture = new FileLab(context);
         }
-        return sFileLab;
+        return sPicture;
     }
 
     private FileLab(Context context) {
