@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mPhotoFile = Picture.get(this).getPhotoFile(mFile);
 
         mTakePhotoButton = (ImageButton) findViewById(R.id.TakePicture);
-        mTakePhotoButton.setImageResource(R.drawable.gallery);
+
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         boolean canTakePhoto = mPhotoFile != null &&
@@ -62,7 +62,14 @@ public class MainActivity extends AppCompatActivity {
 
         });
         mExistingPhotoButton = (ImageButton) findViewById(R.id.OpenExisting);
-        mExistingPhotoButton.setImageResource(R.drawable.new_pic);
+
+        mExistingPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Toast", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
     @Override
