@@ -45,12 +45,12 @@ public class EditorActivity extends AppCompatActivity {
                 .getBooleanExtra(CLOSE_HOSTING_ACTIVITY, true); //Uh, no idea if this will ever be needed, kill main menu activity maybe??
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.image_editor_fragment_container);
+        Fragment fragment = fm.findFragmentById(R.id.image_editor_fragment);
 
         if (fragment == null) {
             fragment = createFragment();
             fm.beginTransaction()
-                    .add(R.id.image_editor_fragment_container,fragment)
+                    .add(R.id.editor_fragment_container,fragment)
                     .commit();
         }
 
