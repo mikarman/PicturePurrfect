@@ -32,7 +32,7 @@ public class CanvasFragment extends Fragment{
     }
 
     @Override
-    public CanvasView onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() called");
 
@@ -49,7 +49,7 @@ public class CanvasFragment extends Fragment{
         }
 
         mCanvasView.setImage(mBitmap);
-        
-        return mCanvasView;
+
+        return v;
     }
 }
