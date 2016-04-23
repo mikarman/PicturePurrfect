@@ -29,11 +29,11 @@ public class EditorActivity extends AppCompatActivity {
         intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
         return intent;
     }
-
+/*
     protected Fragment createFragment() {
         return new EditorImageFragment();
     }
-
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +45,19 @@ public class EditorActivity extends AppCompatActivity {
                 .getBooleanExtra(CLOSE_HOSTING_ACTIVITY, true); //Uh, no idea if this will ever be needed, kill main menu activity maybe??
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.image_editor_fragment);
+        Fragment editorImageFragment = fm.findFragmentById(R.id.image_editor_fragment);
+        //Fragment topMenuFragment = fm.findFragmentById(R.id.top_menu_fragment);
 
-        if (fragment == null) {
-            fragment = createFragment();
+
+        // Maybe check if editorImageFragment is not null, then close the fragment, update the fragment?
+        if (editorImageFragment == null) {  // if there is no editorImageFragment yet, make new one
+            editorImageFragment = new EditorImageFragment();
+            Fragment topMenuFragment = new TopMenuFragment();
+            Fragment bottomMenuFragment = new BottomMenuFragment();
             fm.beginTransaction()
-                    .add(R.id.editor_fragment_container,fragment)
+                    .add(R.id.editor_fragment_container, editorImageFragment)
+                    .add(R.id.editor_fragment_container, topMenuFragment)
+                    .add(R.id.editor_fragment_container, bottomMenuFragment)
                     .commit();
         }
 
