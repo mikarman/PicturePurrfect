@@ -51,7 +51,8 @@ public class EditorActivity extends AppCompatActivity {
 
         // Maybe check if editorImageFragment is not null, then close the fragment, update the fragment?
         if (editorImageFragment == null) {  // if there is no editorImageFragment yet, make new one
-            editorImageFragment = new EditorImageFragment();
+            //editorImageFragment = new EditorImageFragment();
+            editorImageFragment = new CanvasFragment();
             Fragment topMenuFragment = new TopMenuFragment();
             Fragment bottomMenuFragment = new BottomMenuFragment();
             fm.beginTransaction()

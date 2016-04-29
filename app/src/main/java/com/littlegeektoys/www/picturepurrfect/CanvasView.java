@@ -30,7 +30,7 @@ public class CanvasView extends View {
         mCanvasHeight = canvas.getHeight();
         int centerX = mCanvasWidth/2;
         int centerY = mCanvasHeight/2;
-        canvas.drawBitmap(mImage, centerX, centerY, null);
+        canvas.drawBitmap(mImage, 0, 0, null);
         canvas.drawLine(centerX,centerY,400,400,p);
     }
 
