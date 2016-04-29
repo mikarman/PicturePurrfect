@@ -57,4 +57,9 @@ public class CanvasFragment extends Fragment{
 
         return v;
     }
+
+    public void changeColor (){
+        //mCanvasView.bw(mBitmap);
+        Log.d("CanvasFragment", "changeColor");
+    }
 }

@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 /**
  * Created by Michael Karman on 4/10/2016.
  */
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements BottomMenuFragment.Callbacks{
 
     /* Not used
     private static final String EXTRA_PIC_ID =
@@ -35,6 +36,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class EditorActivity extends AppCompatActivity {
                 .getBooleanExtra(CLOSE_HOSTING_ACTIVITY, true); //Uh, no idea if this will ever be needed, kill main menu activity maybe??
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment editorImageFragment = fm.findFragmentById(R.id.image_editor_fragment);
+        Fragment editorImageFragment = fm.findFragmentById(R.id.canvas_container);
         //Fragment topMenuFragment = fm.findFragmentById(R.id.top_menu_fragment);
 
 
@@ -62,7 +64,18 @@ public class EditorActivity extends AppCompatActivity {
                     .commit();
         }
 
+
+
     }
+    @Override
+    public void onColorChanged() {
+        CanvasFragment canvas = (CanvasFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.canvas_container);
+        canvas.changeColor();
+        Log.d("EditorActivity", "OnColorChanged");
+    }
+
+
 
     public Uri getPhoto() { return photo; }
 }

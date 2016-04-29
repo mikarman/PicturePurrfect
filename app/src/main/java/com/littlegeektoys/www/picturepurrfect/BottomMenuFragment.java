@@ -1,5 +1,7 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.io.File;
+
 /**
  * Created by Michael Karman on 4/22/2016.
  */
@@ -17,6 +21,21 @@ public class BottomMenuFragment extends Fragment {
     private ImageButton mStickerButton;
     private ImageButton mColorButton;
     private ImageButton mTextButton;
+    private Bitmap mBitmap;
+    private File mPhotoFile;
+    private EditorActivity mHostingActivity;
+    private Callbacks mCallbacks; //Added chapter 17
+
+    //call backs
+
+    public interface  Callbacks {
+        void onColorChanged();
+    }
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +49,7 @@ public class BottomMenuFragment extends Fragment {
         Log.d(TAG, "onCreateView() called");
 
         View v = inflater.inflate(R.layout.bottom_menu_fragment, container, false);
+
 
         mStickerButton = (ImageButton) v.findViewById(R.id.sticker_button);
 
@@ -46,6 +66,7 @@ public class BottomMenuFragment extends Fragment {
         mColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCallbacks.onColorChanged();
                 Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
