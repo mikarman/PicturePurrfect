@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,7 +37,11 @@ public class CanvasFragment extends Fragment{
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView() called");
 
+
+        View v = inflater.inflate(R.layout.canvas_fragment, null);
+        FrameLayout canvasContainer = (FrameLayout) v.findViewById(R.id.canvas_container);
         mCanvasView = new CanvasView(getContext());
+        canvasContainer.addView(mCanvasView);
 
         mHostingActivity = (EditorActivity) getActivity();
         mPhotoFile = new File(mHostingActivity.getPhoto().getPath());
