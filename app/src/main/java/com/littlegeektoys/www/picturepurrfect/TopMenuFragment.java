@@ -18,6 +18,14 @@ public class TopMenuFragment extends Fragment {
     private ImageButton mMenuButton;
     private ImageButton mShareButton;
     private ImageButton mRetakeButton;
+    private TopMenuCallback mCallback;
+
+    public interface TopMenuCallback {
+        void onSave();
+        void onReturnMenu();
+        void onShare();
+        void onRetake();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

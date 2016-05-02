@@ -24,17 +24,12 @@ public class BottomMenuFragment extends Fragment {
     private Bitmap mBitmap;
     private File mPhotoFile;
     private EditorActivity mHostingActivity;
-    private Callbacks mCallbacks; //Added chapter 17
+    private MenuToolInterface mCallbacks; //Added chapter 17
 
-    //call backs
-
-    public interface  Callbacks {
-        void onColorChanged();
-    }
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
-        mCallbacks = (Callbacks) activity;
+        mCallbacks = (MenuToolInterface) activity;
     }
 
     @Override
@@ -66,7 +61,7 @@ public class BottomMenuFragment extends Fragment {
         mColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallbacks.onColorChanged();
+                mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
                 Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
             }
 

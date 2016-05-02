@@ -24,7 +24,6 @@ public class CanvasFragment extends Fragment{
     private EditorActivity mHostingActivity;
     private File mPhotoFile;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +57,20 @@ public class CanvasFragment extends Fragment{
         return v;
     }
 
+    //Update Photo
+    public void updatePhoto() {
+        mPhotoFile = new File(mHostingActivity.getPhoto().getPath());
+        if (mPhotoFile != null || mPhotoFile.exists()) {
+            mBitmap = PictureUtils.getScaledBitmap(
+                    mPhotoFile.getPath(), mHostingActivity);
+            mCanvasView.setImage(mBitmap);
+            mCanvasView.invalidate();
+        }
+    }
+
     public void changeColor (){
-        //mCanvasView.bw(mBitmap);
-        Log.d("CanvasFragment", "changeColor");
+        mBitmap = mCanvasView.bw(mBitmap);
+        mCanvasView.invalidate();
+        Log.d(TAG, "changeColor");
     }
 }

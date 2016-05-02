@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/image_editor_fragment"/>
+    <!--<include layout="@layout/image_editor_fragment"/>-->
+    <include layout="@layout/canvas_fragment"/>
+    <include layout="@layout/top_menu_fragment"/>
+    <include layout="@layout/bottom_menu_fragment"/>
 
 </FrameLayout>
