@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Switch;
 
 /**
  * Created by Michael Karman on 4/10/2016.
@@ -33,10 +34,26 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     @Override
     public void onToolSelect(ToolName tool) {
         Log.d(TAG, "OnColorChanged");
-        if (fm != null) {
-            CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-            canvasFragment.changeColor();
+
+        switch (tool) {
+            case COLOR: {
+                if (fm != null) {
+                    CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                    canvasFragment.changeColor();
+                }
+            }
+                break;
+            case TEXT: {
+                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                canvasFragment.saveImage();
+            }
+                break;
+            default:
+                break;
         }
+
+
+
     }
 
     // Top Menu callbacks implementation

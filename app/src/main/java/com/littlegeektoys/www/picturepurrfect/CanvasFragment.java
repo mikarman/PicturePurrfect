@@ -2,6 +2,7 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,8 +70,16 @@ public class CanvasFragment extends Fragment{
     }
 
     public void changeColor (){
-        mBitmap = mCanvasView.bw(mBitmap);
+        mBitmap = mCanvasView.toGrayscale(mBitmap);
+        mCanvasView.setImage(mBitmap);
         mCanvasView.invalidate();
         Log.d(TAG, "changeColor");
+    }
+
+    public void saveImage() {
+        Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
+                Toast.LENGTH_LONG).show();
+
+        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
     }
 }

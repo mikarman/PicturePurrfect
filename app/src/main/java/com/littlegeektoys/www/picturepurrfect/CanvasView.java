@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageButton;
@@ -36,14 +38,32 @@ public class CanvasView extends View {
         mCanvasHeight = canvas.getHeight();
         int centerX = mCanvasWidth/2;
         int centerY = mCanvasHeight/2;
+      //  mImage = toGrayscale(mImage);
         canvas.drawBitmap(mImage, 0, 0, null);
-        canvas.drawLine(centerX,centerY,400,400,p);
+        canvas.drawLine(centerX, centerY, 400, 400, p);
     }
 
     public void setImage(Bitmap image){
         mImage = image;
     }
 
+
+    public Bitmap toGrayscale(Bitmap bmpOriginal)
+    {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
+    }
 
     public static Bitmap bw(Bitmap image) {
         // This function turns a bitmap to black and white

@@ -72,7 +72,8 @@ public class BottomMenuFragment extends Fragment {
         mTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This will allow users to put text on the picture they are editing", Toast.LENGTH_LONG).show();
+                mCallbacks.onToolSelect(MenuToolInterface.ToolName.TEXT);
+                //Toast.makeText(getContext(), "This will allow users to put text on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });
