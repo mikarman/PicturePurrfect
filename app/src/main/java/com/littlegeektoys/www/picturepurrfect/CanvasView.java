@@ -36,8 +36,8 @@ public class CanvasView extends View {
         p.setColor(Color.RED);
         mCanvasWidth = canvas.getWidth();
         mCanvasHeight = canvas.getHeight();
-        int centerX = mCanvasWidth/2;
-        int centerY = mCanvasHeight/2;
+        int centerX = mCanvasWidth/2 - mImage.getWidth()/2;
+        int centerY = mCanvasHeight/2 - mImage.getHeight()/2;
       //  mImage = toGrayscale(mImage);
         canvas.drawBitmap(mImage, 0, 0, null);
         canvas.drawLine(centerX, centerY, 400, 400, p);
