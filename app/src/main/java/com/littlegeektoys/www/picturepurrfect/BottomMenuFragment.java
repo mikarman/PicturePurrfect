@@ -51,6 +51,7 @@ public class BottomMenuFragment extends Fragment {
         mStickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCallbacks.onToolSelect(MenuToolInterface.ToolName.STICKER);
                 Toast.makeText(getContext(), "This will allow users to put stickers on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
