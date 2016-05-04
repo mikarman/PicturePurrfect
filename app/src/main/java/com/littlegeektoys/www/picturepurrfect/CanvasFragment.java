@@ -1,6 +1,10 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -13,7 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.OutputStream;
 
 /**
  * Created by Jesse DeMott on 4/22/2016.
@@ -81,5 +87,8 @@ public class CanvasFragment extends Fragment{
                 Toast.LENGTH_LONG).show();
 
         MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
+    }
+
+    public void shareImgae() {
     }
 }
