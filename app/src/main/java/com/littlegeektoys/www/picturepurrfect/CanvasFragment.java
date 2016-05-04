@@ -77,7 +77,7 @@ public class CanvasFragment extends Fragment{
     }
 
     public void stickerOn(){
-       mCanvasView.stickerOn();
+       mCanvasView.setStickerOn();
     }
 
     public void saveImage() {
