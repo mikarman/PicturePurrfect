@@ -3,14 +3,19 @@ package com.littlegeektoys.www.picturepurrfect;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Jesse DeMott on 4/22/2016.
@@ -19,16 +24,15 @@ public class CanvasView extends View {
     private Bitmap mImage;
     private int mCanvasWidth;
     private int mCanvasHeight;
-
+    private boolean stickerOn = false;
+    private boolean textOn = false;
+    private ArrayList<Sticker> stickers;
 
     Paint p = new Paint();
-
 
     public CanvasView(Context context)   {
         super(context);
     }
-
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -36,16 +40,39 @@ public class CanvasView extends View {
         p.setColor(Color.RED);
         mCanvasWidth = canvas.getWidth();
         mCanvasHeight = canvas.getHeight();
-        int centerX = mCanvasWidth/2 - mImage.getWidth()/2;
-        int centerY = mCanvasHeight/2 - mImage.getHeight()/2;
-      //  mImage = toGrayscale(mImage);
-        canvas.drawBitmap(mImage, 0, 0, null);
-        canvas.drawLine(centerX, centerY, 400, 400, p);
-        canvas.drawText("Cat", 400, 400, p);
+        float centerX = mCanvasWidth/2 - mImage.getWidth()/2;
+        float centerY = mCanvasHeight/2 - mImage.getHeight()/2;
+        //mImage = toGrayscale(mImage);
+        canvas.drawBitmap(mImage, centerX, centerY, null);
+        //canvas.drawLine(centerX, centerY, 400, 400, p);
+        //canvas.drawText("Cat", 400, 400, p);
+        if(stickers.size()>0) {
+            for (Sticker s : stickers){
+                canvas.drawBitmap(s.getSticker(),s.getX(),s.getY(),null);
+            }
+        }
     }
 
     public void setImage(Bitmap image){
         mImage = image;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if(stickerOn) {
+                    Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),
+                            R.drawable.cat);
+                    stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                    invalidate();
+                }
+                break;
+            default:
+                return true;
+        }
+
+        return true;
     }
 
 
@@ -146,5 +173,10 @@ public class CanvasView extends View {
         return bwBitmap;
     }
 
+
+    public void setStickerOn(){
+        stickerOn = true;
+        textOn = false;
+    }
 
 }

@@ -41,21 +41,21 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                     CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
                     canvasFragment.changeColor();
                 }
-            }
                 break;
+            }
+            case STICKER: {
+                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                canvasFragment.stickerOn();
+                break;
+            }
             case TEXT: {
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
                 canvasFragment.saveImage();
-            }
-
-
                 break;
+            }
             default:
                 break;
         }
-
-
-
     }
 
     // Top Menu callbacks implementation
