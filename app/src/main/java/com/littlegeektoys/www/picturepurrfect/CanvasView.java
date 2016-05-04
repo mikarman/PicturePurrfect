@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -19,16 +21,15 @@ public class CanvasView extends View {
     private Bitmap mImage;
     private int mCanvasWidth;
     private int mCanvasHeight;
-
+    private boolean stickerOn = false;
+    private boolean textOn = false;
+    private BitmapDrawable sticker;
 
     Paint p = new Paint();
-
 
     public CanvasView(Context context)   {
         super(context);
     }
-
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -45,6 +46,18 @@ public class CanvasView extends View {
 
     public void setImage(Bitmap image){
         mImage = image;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        switch (e.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+
+
+        }
+
+        return true;
     }
 
 
@@ -145,5 +158,10 @@ public class CanvasView extends View {
         return bwBitmap;
     }
 
+
+    public void setStickerOn(){
+        stickerOn = true;
+        textOn = false;
+    }
 
 }

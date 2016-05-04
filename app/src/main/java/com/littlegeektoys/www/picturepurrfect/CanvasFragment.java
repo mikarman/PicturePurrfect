@@ -76,6 +76,10 @@ public class CanvasFragment extends Fragment{
         Log.d(TAG, "changeColor");
     }
 
+    public void stickerOn(){
+       mCanvasView.stickerOn();
+    }
+
     public void saveImage() {
         Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
                 Toast.LENGTH_LONG).show();
