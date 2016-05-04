@@ -150,6 +150,6 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 canvasFragment.updatePhoto();
             }
         }
-        // super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data); // test
     }
 }

@@ -26,7 +26,7 @@ public class CanvasView extends View {
     private int mCanvasHeight;
     private boolean stickerOn = false;
     private boolean textOn = false;
-    private ArrayList<Sticker> stickers;
+    private ArrayList<Sticker> stickers = new ArrayList<>();
 
     Paint p = new Paint();
 
