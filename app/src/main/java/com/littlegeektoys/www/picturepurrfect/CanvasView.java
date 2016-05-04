@@ -41,6 +41,7 @@ public class CanvasView extends View {
       //  mImage = toGrayscale(mImage);
         canvas.drawBitmap(mImage, 0, 0, null);
         canvas.drawLine(centerX, centerY, 400, 400, p);
+        canvas.drawText("Cat", 400, 400, p);
     }
 
     public void setImage(Bitmap image){

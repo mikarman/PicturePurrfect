@@ -47,6 +47,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
                 canvasFragment.saveImage();
             }
+
+
                 break;
             default:
                 break;
