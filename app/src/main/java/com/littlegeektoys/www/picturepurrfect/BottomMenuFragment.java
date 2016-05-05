@@ -1,9 +1,11 @@
 package com.littlegeektoys.www.picturepurrfect;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,10 @@ import java.io.File;
  * Created by Michael Karman on 4/22/2016.
  */
 public class BottomMenuFragment extends Fragment {
+
+    private static final String DIALOG_STICKER = "DialogSticker";
+    private static final int REQUEST_STICKER = 0;
+
     private static final String TAG = "TopMenuFragment";
     private ImageButton mStickerButton;
     private ImageButton mColorButton;
@@ -25,6 +31,7 @@ public class BottomMenuFragment extends Fragment {
     private File mPhotoFile;
     private EditorActivity mHostingActivity;
     private MenuToolInterface mCallbacks; //Added chapter 17
+    private String sticker;
 
     @Override
     public void onAttach(Activity activity){
@@ -36,6 +43,20 @@ public class BottomMenuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate() called");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (resultCode != Activity.RESULT_OK){
+            Log.i("BottomMenuFragment" , "sticker not set");
+            return;
+        }
+
+        if(requestCode == REQUEST_STICKER){
+            sticker = (String) data.getSerializableExtra(StickerPickerFragment.EXTRA_STICKER);
+            Log.i("BottomMenuFragment" , sticker + " set");
+            mCallbacks.onStickerSelect(sticker);
+        }
     }
 
     @Override
@@ -51,8 +72,12 @@ public class BottomMenuFragment extends Fragment {
         mStickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallbacks.onToolSelect(MenuToolInterface.ToolName.STICKER);
-                Toast.makeText(getContext(), "This will allow users to put stickers on the picture they are editing", Toast.LENGTH_LONG).show();
+                FragmentManager manager = getFragmentManager();
+                StickerPickerFragment dialog = StickerPickerFragment.newInstance();
+                dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_STICKER);
+                dialog.show(manager, DIALOG_STICKER);
+
+                //Toast.makeText(getContext(), "This will allow users to put stickers on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });

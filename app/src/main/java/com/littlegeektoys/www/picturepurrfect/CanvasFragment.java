@@ -80,13 +80,13 @@ public class CanvasFragment extends Fragment{
         Log.d(TAG, "changeColor");
     }
 
-    public void stickerOn(){
-       mCanvasView.setStickerOn();
+    public void stickerOn(String sticker){
+       mCanvasView.setStickerOn(sticker);
     }
 
     public void saveImage() {
-            Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Saved!",
+                    Toast.LENGTH_SHORT).show();
             MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
 
     }

@@ -36,6 +36,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     private FragmentManager fm;
 
     @Override
+    public void onStickerSelect(String sticker){
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.stickerOn(sticker);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
 
 
@@ -48,8 +54,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 break;
             }
             case STICKER: {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                canvasFragment.stickerOn();
+                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //canvasFragment.stickerOn();
                 break;
             }
             case TEXT: {
