@@ -27,7 +27,9 @@ public class CanvasView extends View {
     private boolean stickerOn = false;
     private boolean textOn = false;
     private String sticker;
+    private String text;
     private ArrayList<Sticker> stickers = new ArrayList<>();
+    private ArrayList<TextSticker> textStickers = new ArrayList<>();
 
     Paint p = new Paint();
 
@@ -54,6 +56,14 @@ public class CanvasView extends View {
                 float stickerX = s.getX() - width/2;
                 float stickerY = s.getY() - width/2;
                 canvas.drawBitmap(s.getSticker(),stickerX,stickerY,null);
+            }
+        }
+        if(textStickers.size()>0) {
+            for (TextSticker s : textStickers){
+                Paint paint = new Paint();
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(20);
+                canvas.drawText(s.getTextSticker(), s.getX(), s.getY(), paint);
             }
         }
     }
@@ -98,6 +108,11 @@ public class CanvasView extends View {
                     }
                     invalidate();
                 }
+
+                if(textOn){
+                    textStickers.add(new TextSticker(text,e.getX(),e.getY()));
+                }
+
                 break;
             default:
                 return true;
@@ -213,6 +228,12 @@ public class CanvasView extends View {
 
     public void clearStickers(){
         stickers.clear();
+    }
+
+    public void setTextOn(String text){
+        stickerOn = false;
+        textOn = true;
+        this.text = text;
     }
 
 }

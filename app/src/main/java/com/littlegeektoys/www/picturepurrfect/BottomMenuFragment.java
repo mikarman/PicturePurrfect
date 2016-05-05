@@ -88,7 +88,7 @@ public class BottomMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
-                Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -103,7 +103,6 @@ public class BottomMenuFragment extends Fragment {
             }
 
         });
-        Toast.makeText(getContext(), "We are working out the bugs with our fragments here. The picture should be displayed in the middle and the menu should only appear once.", Toast.LENGTH_LONG).show();
 
         return v;
     }
