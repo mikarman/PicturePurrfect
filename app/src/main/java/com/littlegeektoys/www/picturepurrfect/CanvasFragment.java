@@ -1,6 +1,7 @@
 package com.littlegeektoys.www.picturepurrfect;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Created by Jesse DeMott on 4/22/2016.
@@ -45,6 +47,7 @@ public class CanvasFragment extends Fragment{
         View v = inflater.inflate(R.layout.canvas_fragment, null);
         FrameLayout canvasContainer = (FrameLayout) v.findViewById(R.id.canvas_container);
         mCanvasView = new CanvasView(getContext());
+        mCanvasView.setDrawingCacheEnabled(true);
         canvasContainer.addView(mCanvasView);
 
         mHostingActivity = (EditorActivity) getActivity();
@@ -85,9 +88,10 @@ public class CanvasFragment extends Fragment{
     }
 
     public void saveImage() {
-            Toast.makeText(getActivity(), "Saved!",
+        Bitmap bitmap = mCanvasView.getDrawingCache();
+        Toast.makeText(getActivity(), "Saved!",
                     Toast.LENGTH_SHORT).show();
-            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
 
     }
 }
