@@ -33,7 +33,6 @@ public class CanvasFragment extends Fragment{
     private Bitmap mBitmap;
     private EditorActivity mHostingActivity;
     private File mPhotoFile;
-    private String text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +94,7 @@ public class CanvasFragment extends Fragment{
         mCanvasView.clearStickers();
     }
 
-    public void textOn(){
+    public void textOn(String text){
         mCanvasView.setTextOn(text);
     }
 

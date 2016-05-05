@@ -45,6 +45,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     @Override
+    public void onTextInput(String text){
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.textOn(text);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
 
 
@@ -63,9 +69,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             }
             case TEXT: {
 
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                canvasFragment.textOn();
-                break;
+                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //canvasFragment.textOn();
+                //break;
             }
             default:
                 break;

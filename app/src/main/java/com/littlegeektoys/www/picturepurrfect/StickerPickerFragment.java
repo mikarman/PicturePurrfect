@@ -14,18 +14,15 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 
 /**
- * Created by Jesse DeMott on 2/21/16.
+ * Created by Jesse DeMott on 5/5/16.
  */
 
-/**
- * Date Picker Fragment used for crimes Date Dialog
- */
 public class StickerPickerFragment extends DialogFragment {
 
     //Listing 12.9 Calling back to your target
     public static final String EXTRA_STICKER = "com.littlegeektoys.www.picturepurrfect.sticker";
 
-    private static final String ARG_STICKER = "sticker";
+    //private static final String ARG_STICKER = "sticker";
     private String sticker;
 
     private GridLayout mGridLayout;

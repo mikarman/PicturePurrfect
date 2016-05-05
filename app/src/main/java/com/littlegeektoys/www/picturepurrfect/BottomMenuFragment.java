@@ -21,7 +21,9 @@ import java.io.File;
 public class BottomMenuFragment extends Fragment {
 
     private static final String DIALOG_STICKER = "DialogSticker";
+    private static final String DIALOG_TEXT_INPUT = "DialogTextInput";
     private static final int REQUEST_STICKER = 0;
+    private static final int REQUEST_TEXT = 1;
 
     private static final String TAG = "TopMenuFragment";
     private ImageButton mStickerButton;
@@ -32,6 +34,7 @@ public class BottomMenuFragment extends Fragment {
     private EditorActivity mHostingActivity;
     private MenuToolInterface mCallbacks; //Added chapter 17
     private String sticker;
+    private String text;
 
     @Override
     public void onAttach(Activity activity){
@@ -56,6 +59,12 @@ public class BottomMenuFragment extends Fragment {
             sticker = (String) data.getSerializableExtra(StickerPickerFragment.EXTRA_STICKER);
             Log.i("BottomMenuFragment" , sticker + " set");
             mCallbacks.onStickerSelect(sticker);
+        }
+
+        if(requestCode == REQUEST_TEXT){
+            text = (String) data.getSerializableExtra(TextInputFragment.EXTRA_TEXT);
+            Log.i("BottomMenuFragment" , text + " input");
+            mCallbacks.onTextInput(text);
         }
     }
 
@@ -98,7 +107,11 @@ public class BottomMenuFragment extends Fragment {
         mTextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallbacks.onToolSelect(MenuToolInterface.ToolName.TEXT);
+                FragmentManager manager = getFragmentManager();
+                TextInputFragment dialog = TextInputFragment.newInstance();
+                dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_TEXT);
+                dialog.show(manager, DIALOG_TEXT_INPUT);
+                //mCallbacks.onToolSelect(MenuToolInterface.ToolName.TEXT);
                 //Toast.makeText(getContext(), "This will allow users to put text on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 

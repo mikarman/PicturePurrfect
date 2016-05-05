@@ -10,6 +10,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -29,7 +30,7 @@ public class CanvasView extends View {
     private String sticker;
     private String text;
     private ArrayList<Sticker> stickers = new ArrayList<>();
-    private ArrayList<TextSticker> textStickers = new ArrayList<>();
+    //private ArrayList<TextSticker> textStickers = new ArrayList<>();
 
     Paint p = new Paint();
 
@@ -45,25 +46,23 @@ public class CanvasView extends View {
         mCanvasHeight = canvas.getHeight();
         float centerX = mCanvasWidth/2 - mImage.getWidth()/2;
         float centerY = mCanvasHeight/2 - mImage.getHeight()/2;
-        //mImage = toGrayscale(mImage);
         canvas.drawBitmap(mImage, centerX, centerY, null);
-        //canvas.drawLine(centerX, centerY, 400, 400, p);
-        //canvas.drawText("Cat", 400, 400, p);
         if(stickers.size()>0) {
             for (Sticker s : stickers){
-                int width = s.getSticker().getWidth();
-                int height = s.getSticker().getWidth();
-                float stickerX = s.getX() - width/2;
-                float stickerY = s.getY() - width/2;
-                canvas.drawBitmap(s.getSticker(),stickerX,stickerY,null);
-            }
-        }
-        if(textStickers.size()>0) {
-            for (TextSticker s : textStickers){
-                Paint paint = new Paint();
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(20);
-                canvas.drawText(s.getTextSticker(), s.getX(), s.getY(), paint);
+                if(s.isText()){
+                    Log.i("CanvasView","text drawn");
+                    Paint paint = new Paint();
+                    paint.setColor(Color.WHITE);
+                    paint.setTextSize(100);
+                    canvas.drawText(s.getTextSticker(), s.getX(), s.getY(), paint);
+                } else {
+                    Log.i("CanvasView","sticker drawn");
+                    int width = s.getSticker().getWidth();
+                    int height = s.getSticker().getWidth();
+                    float stickerX = s.getX() - width / 2;
+                    float stickerY = s.getY() - height / 2;
+                    canvas.drawBitmap(s.getSticker(), stickerX, stickerY, null);
+                }
             }
         }
     }
@@ -106,18 +105,18 @@ public class CanvasView extends View {
                         default:
                             break;
                     }
-                    invalidate();
                 }
 
                 if(textOn){
-                    textStickers.add(new TextSticker(text,e.getX(),e.getY()));
+                    Log.i("CanvasView", "Text touch event triggered");
+                    stickers.add(new Sticker(text,e.getX(),e.getY()));
                 }
 
                 break;
             default:
                 return true;
         }
-
+        invalidate();
         return true;
     }
 
@@ -234,6 +233,7 @@ public class CanvasView extends View {
         stickerOn = false;
         textOn = true;
         this.text = text;
+        Log.i("CanvasView", "text set to " + text);
     }
 
 }
