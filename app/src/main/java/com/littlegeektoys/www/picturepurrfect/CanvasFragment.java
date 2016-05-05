@@ -86,13 +86,23 @@ public class CanvasFragment extends Fragment{
        mCanvasView.setStickerOn();
     }
 
-    public void saveImage() {
+/*    public void saveImage() {
         Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
                 Toast.LENGTH_LONG).show();
 
         MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
-    }
+    }*/
 
-    public void shareImgae() {
+    public void saveImage() {
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("text/plain");
+        i.putExtra(Intent.EXTRA_TEXT, "cat");
+        //i.putExtra(Intent.EXTRA_SUBJECT,
+                //getString(R.string.crime_report_subject));
+        i = Intent.createChooser(i, getString(R.string.send_report));
+        startActivity(i);
+
+
     }
 }
