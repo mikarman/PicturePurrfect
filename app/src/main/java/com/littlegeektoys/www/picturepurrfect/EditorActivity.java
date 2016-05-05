@@ -1,13 +1,17 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Switch;
@@ -33,7 +37,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onToolSelect(ToolName tool) {
-        Log.d(TAG, "OnColorChanged");
+
 
         switch (tool) {
             case COLOR: {
@@ -50,7 +54,16 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             }
             case TEXT: {
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                canvasFragment.saveImage();
+                if(Build.VERSION.SDK_INT >= 23) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
+                        canvasFragment.saveImage();
+                    }
+                } else {
+                    canvasFragment.saveImage();
+                }
                 break;
             }
             default:

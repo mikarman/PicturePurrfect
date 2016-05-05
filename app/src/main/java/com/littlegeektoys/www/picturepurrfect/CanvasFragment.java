@@ -1,9 +1,13 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,9 +85,9 @@ public class CanvasFragment extends Fragment{
     }
 
     public void saveImage() {
-        Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
-                Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
+                    Toast.LENGTH_LONG).show();
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
 
-        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
     }
 }
