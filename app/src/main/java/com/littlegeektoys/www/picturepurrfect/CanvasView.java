@@ -211,4 +211,8 @@ public class CanvasView extends View {
         this.sticker = sticker;
     }
 
+    public void clearStickers(){
+        stickers.clear();
+    }
+
 }

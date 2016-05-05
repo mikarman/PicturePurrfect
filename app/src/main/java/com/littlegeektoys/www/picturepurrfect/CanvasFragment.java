@@ -87,11 +87,17 @@ public class CanvasFragment extends Fragment{
        mCanvasView.setStickerOn(sticker);
     }
 
+    public void clearStickers(){
+        mCanvasView.clearStickers();
+    }
+
+
     public void saveImage() {
         Bitmap bitmap = mCanvasView.getDrawingCache();
         Toast.makeText(getActivity(), "Saved!",
                     Toast.LENGTH_SHORT).show();
             MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
+        mCanvasView.destroyDrawingCache();
 
     }
 }

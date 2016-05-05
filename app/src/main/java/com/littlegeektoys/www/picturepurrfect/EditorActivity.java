@@ -59,17 +59,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 break;
             }
             case TEXT: {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                if(Build.VERSION.SDK_INT >= 23) {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-                        canvasFragment.saveImage();
-                    }
-                } else {
-                    canvasFragment.saveImage();
-                }
                 break;
             }
             default:
@@ -80,7 +70,17 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     // Top Menu callbacks implementation
     @Override
     public void onSave() {
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
+                canvasFragment.saveImage();
+            }
+        } else {
+            canvasFragment.saveImage();
+        }
     }
 
     @Override
@@ -101,6 +101,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photo);
             startActivityForResult(captureImage, REQUEST_PHOTO);
         }
+
     }
 
     @Override
@@ -166,6 +167,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //Clear stickers
+                canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();
             }
         }

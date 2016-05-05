@@ -52,6 +52,7 @@ public class TopMenuFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCallbacks.onSave();
                 Toast.makeText(getContext(), "This will allow users to save the picture to their photo gallery after the y are done editing.", Toast.LENGTH_LONG).show();
             }
 
