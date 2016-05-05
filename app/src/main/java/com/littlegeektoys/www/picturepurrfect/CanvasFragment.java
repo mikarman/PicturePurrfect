@@ -1,5 +1,8 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.content.Intent;
+
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -8,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +23,6 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.OutputStream;
 
 /**
  * Created by Jesse DeMott on 4/22/2016.
@@ -47,6 +50,7 @@ public class CanvasFragment extends Fragment{
         View v = inflater.inflate(R.layout.canvas_fragment, null);
         FrameLayout canvasContainer = (FrameLayout) v.findViewById(R.id.canvas_container);
         mCanvasView = new CanvasView(getContext());
+        mCanvasView.setDrawingCacheEnabled(true);
         canvasContainer.addView(mCanvasView);
 
         mHostingActivity = (EditorActivity) getActivity();
@@ -82,8 +86,8 @@ public class CanvasFragment extends Fragment{
         Log.d(TAG, "changeColor");
     }
 
-    public void stickerOn(){
-       mCanvasView.setStickerOn();
+    public void stickerOn(String sticker){
+       mCanvasView.setStickerOn(sticker);
     }
 
 /*    public void saveImage() {
@@ -93,16 +97,28 @@ public class CanvasFragment extends Fragment{
         MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
     }*/
 
-    public void saveImage() {
+    public void shareImage() {
 
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("text/plain");
         i.putExtra(Intent.EXTRA_TEXT, "cat");
         //i.putExtra(Intent.EXTRA_SUBJECT,
-                //getString(R.string.crime_report_subject));
+        //getString(R.string.crime_report_subject));
         i = Intent.createChooser(i, getString(R.string.send_report));
         startActivity(i);
-
-
     }
+
+    public void clearStickers(){
+        mCanvasView.clearStickers();
+    }
+
+
+    public void saveImage() {
+        Bitmap bitmap = mCanvasView.getDrawingCache();
+        Toast.makeText(getActivity(), "Saved!",
+                    Toast.LENGTH_SHORT).show();
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
+        mCanvasView.destroyDrawingCache();
+
+  }
 }

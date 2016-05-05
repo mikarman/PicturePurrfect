@@ -1,5 +1,6 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,13 +19,19 @@ public class TopMenuFragment extends Fragment {
     private ImageButton mMenuButton;
     private ImageButton mShareButton;
     private ImageButton mRetakeButton;
-    private TopMenuCallback mCallback;
+    private TopMenuCallback mCallbacks;
 
     public interface TopMenuCallback {
         void onSave();
         void onReturnMenu();
         void onShare();
         void onRetake();
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        mCallbacks = (TopMenuCallback) activity;
     }
 
     @Override
@@ -45,6 +52,7 @@ public class TopMenuFragment extends Fragment {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCallbacks.onSave();
                 Toast.makeText(getContext(), "This will allow users to save the picture to their photo gallery after the y are done editing.", Toast.LENGTH_LONG).show();
             }
 
@@ -76,6 +84,7 @@ public class TopMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "This will allow the user to take a new picture.", Toast.LENGTH_LONG).show();
+                mCallbacks.onRetake();
             }
 
         });

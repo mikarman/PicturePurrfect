@@ -1,13 +1,17 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Switch;
@@ -32,8 +36,14 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     private FragmentManager fm;
 
     @Override
+    public void onStickerSelect(String sticker){
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.stickerOn(sticker);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
-        Log.d(TAG, "OnColorChanged");
+
 
         switch (tool) {
             case COLOR: {
@@ -44,13 +54,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 break;
             }
             case STICKER: {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                canvasFragment.stickerOn();
+                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //canvasFragment.stickerOn();
                 break;
             }
             case TEXT: {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                canvasFragment.saveImage();
+
                 break;
             }
             default:
@@ -61,7 +70,17 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     // Top Menu callbacks implementation
     @Override
     public void onSave() {
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
+                canvasFragment.saveImage();
+            }
+        } else {
+            canvasFragment.saveImage();
+        }
     }
 
     @Override
@@ -82,6 +101,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photo);
             startActivityForResult(captureImage, REQUEST_PHOTO);
         }
+
     }
 
     @Override
@@ -147,9 +167,11 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //Clear stickers
+                canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();
             }
         }
-        // super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data); // test
     }
 }

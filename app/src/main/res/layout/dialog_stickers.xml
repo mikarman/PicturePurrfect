@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_sticker_picker"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:rowCount="2">
+
+    <ImageButton
+        android:id="@+id/sticker_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cat"/>
+
+    <ImageButton
+        android:id="@+id/sticker_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/heart"/>
+
+    <ImageButton
+        android:id="@+id/sticker_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/paws"/>
+
+    <ImageButton
+        android:id="@+id/sticker_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/planet"/>
+
+    <ImageButton
+        android:id="@+id/sticker_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star"/>
+
+    <ImageButton
+        android:id="@+id/sticker_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star_two"/>
+
+
+</GridLayout>

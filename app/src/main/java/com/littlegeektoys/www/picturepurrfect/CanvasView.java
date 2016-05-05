@@ -26,6 +26,7 @@ public class CanvasView extends View {
     private int mCanvasHeight;
     private boolean stickerOn = false;
     private boolean textOn = false;
+    private String sticker;
     private ArrayList<Sticker> stickers = new ArrayList<>();
 
     Paint p = new Paint();
@@ -48,7 +49,11 @@ public class CanvasView extends View {
         //canvas.drawText("Cat", 400, 400, p);
         if(stickers.size()>0) {
             for (Sticker s : stickers){
-                canvas.drawBitmap(s.getSticker(),s.getX(),s.getY(),null);
+                int width = s.getSticker().getWidth();
+                int height = s.getSticker().getWidth();
+                float stickerX = s.getX() - width/2;
+                float stickerY = s.getY() - width/2;
+                canvas.drawBitmap(s.getSticker(),stickerX,stickerY,null);
             }
         }
     }
@@ -62,9 +67,35 @@ public class CanvasView extends View {
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if(stickerOn) {
-                    Bitmap icon = BitmapFactory.decodeResource(getContext().getResources(),
-                            R.drawable.cat);
-                    stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                    Bitmap icon;
+                    switch (sticker) {
+                        case "sticker1":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.cat);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker2":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.heart);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker3":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.paws);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker4":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.planet);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker5":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.star);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker6":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.star_two);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        default:
+                            break;
+                    }
                     invalidate();
                 }
                 break;
@@ -174,9 +205,14 @@ public class CanvasView extends View {
     }
 
 
-    public void setStickerOn(){
+    public void setStickerOn(String sticker){
         stickerOn = true;
         textOn = false;
+        this.sticker = sticker;
+    }
+
+    public void clearStickers(){
+        stickers.clear();
     }
 
 }

@@ -12,6 +12,8 @@ public interface MenuToolInterface {
 
     void onToolSelect(ToolName tool);
 
+    void onStickerSelect(String sticker);
+
     void onGoBack();
 
     void onSwitchFragment(Fragment fragment);
