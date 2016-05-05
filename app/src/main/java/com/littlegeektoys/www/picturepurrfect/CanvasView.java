@@ -49,7 +49,11 @@ public class CanvasView extends View {
         //canvas.drawText("Cat", 400, 400, p);
         if(stickers.size()>0) {
             for (Sticker s : stickers){
-                canvas.drawBitmap(s.getSticker(),s.getX(),s.getY(),null);
+                int width = s.getSticker().getWidth();
+                int height = s.getSticker().getWidth();
+                float stickerX = s.getX() - width/2;
+                float stickerY = s.getY() - width/2;
+                canvas.drawBitmap(s.getSticker(),stickerX,stickerY,null);
             }
         }
     }
