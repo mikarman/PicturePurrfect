@@ -80,7 +80,7 @@ public class CanvasFragment extends Fragment{
     }
 
     public void changeColor (){
-        mBitmap = mCanvasView.toGrayscale(mBitmap);
+        mBitmap = mCanvasView.toBlue(mBitmap);
         mCanvasView.setImage(mBitmap);
         mCanvasView.invalidate();
         Log.d(TAG, "changeColor");
@@ -97,16 +97,6 @@ public class CanvasFragment extends Fragment{
         MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
     }*/
 
-    public void shareImage() {
-
-        Intent i = new Intent(Intent.ACTION_SEND);
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_TEXT, "cat");
-        //i.putExtra(Intent.EXTRA_SUBJECT,
-        //getString(R.string.crime_report_subject));
-        i = Intent.createChooser(i, getString(R.string.send_report));
-        startActivity(i);
-    }
 
     public void clearStickers(){
         mCanvasView.clearStickers();

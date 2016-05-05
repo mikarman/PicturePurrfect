@@ -2,9 +2,6 @@
     <string name="app_name">PicturePurrfect</string>
     <string name="take_pic_button">Take New Picture</string>
     <string name="existing_pic_button">Open Existing Picture</string>
-<<<<<<< HEAD
     <string name="send_report"> Send Report Via...</string>
-=======
     <string name="sticker_picker_title">Pick a sticker</string>
->>>>>>> a324ba1e0884e7b982d9a43e17672c7abbd0d604
 </resources>

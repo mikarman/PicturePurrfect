@@ -63,7 +63,8 @@ public class TopMenuFragment extends Fragment {
         mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This will take the user back to the main menu", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "This will take the user back to the main menu", Toast.LENGTH_LONG).show();
+                mCallbacks.onReturnMenu();
             }
 
         });
@@ -74,6 +75,7 @@ public class TopMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "This will allow the user to share there picture through email and social media", Toast.LENGTH_LONG).show();
+                mCallbacks.onShare();
             }
 
         });
