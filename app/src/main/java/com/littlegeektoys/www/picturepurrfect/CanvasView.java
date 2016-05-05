@@ -20,30 +20,65 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
+/*
  * Created by Jesse DeMott on 4/22/2016.
  */
+
+/**
+ * CanvasView contains the canvas that is used to draw the new bitmap.
+ */
 public class CanvasView extends View {
+    /**
+     * Bitmap passed from the camera or gallery
+     */
     private Bitmap mImage;
+    /**
+     * Width of canvas
+     */
     private int mCanvasWidth;
+    /**
+     * Height of canvas
+     */
     private int mCanvasHeight;
+    /**
+     * Flag that for sticker tool
+     */
     private boolean stickerOn = false;
+    /**
+     * Flag that for text tool
+     */
     private boolean textOn = false;
+    /**
+     * Current sticker being drawn
+     */
     private String sticker;
+    /**
+     * Current text being drawn
+     */
     private String text;
+    /**
+     * Array of all sticker and text that have been drawn
+     */
     private ArrayList<Sticker> stickers = new ArrayList<>();
     //private ArrayList<TextSticker> textStickers = new ArrayList<>();
 
-    Paint p = new Paint();
+    Paint paint = new Paint();
 
+    /**
+     * Canvas view constructor
+     * @param context
+     */
     public CanvasView(Context context)   {
         super(context);
     }
 
+    /**
+     * onDraw method draws everything onto the canvas.
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        p.setColor(Color.RED);
         mCanvasWidth = canvas.getWidth();
         mCanvasHeight = canvas.getHeight();
         float centerX = mCanvasWidth/2 - mImage.getWidth()/2;
@@ -53,7 +88,6 @@ public class CanvasView extends View {
             for (Sticker s : stickers){
                 if(s.isText()){
                     Log.i("CanvasView","text drawn");
-                    Paint paint = new Paint();
                     paint.setColor(Color.WHITE);
                     paint.setTextSize(100);
                     canvas.drawText(s.getTextSticker(), s.getX(), s.getY(), paint);
@@ -69,10 +103,19 @@ public class CanvasView extends View {
         }
     }
 
+    /**
+     * Set the image being edited and drawn on
+     * @param image
+     */
     public void setImage(Bitmap image){
         mImage = image;
     }
 
+    /**
+     * onTouchEvent used to draw stickers and text on canvas
+     * @param e
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getAction()) {
@@ -123,6 +166,11 @@ public class CanvasView extends View {
     }
 
 
+    /**
+     * Takes a Bitmap and returns a grayscale version.
+     * @param bmpOriginal
+     * @return
+     */
     public Bitmap toGrayscale(Bitmap bmpOriginal)
     {
         int width, height;
@@ -140,6 +188,7 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
+<<<<<<< HEAD
     public Bitmap toBlue(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
@@ -195,6 +244,8 @@ public class CanvasView extends View {
     }
 
 
+=======
+>>>>>>> 0915085b020c3eeea78085ae0f2854005f406128
     public static Bitmap color(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 2.0;   // We can change these
@@ -236,17 +287,27 @@ public class CanvasView extends View {
         return bwBitmap;
     }
 
-
+    /**
+     * Sets the current sticker and the stickerOn and textOn flags.
+     * @param sticker
+     */
     public void setStickerOn(String sticker){
         stickerOn = true;
         textOn = false;
         this.sticker = sticker;
     }
 
+    /**
+     * clears all stickers and text
+     */
     public void clearStickers(){
         stickers.clear();
     }
 
+    /**
+     * Sets the current text and the stickerOn and textOn flags
+     * @param text
+     */
     public void setTextOn(String text){
         stickerOn = false;
         textOn = true;
