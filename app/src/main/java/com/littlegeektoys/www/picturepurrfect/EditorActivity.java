@@ -2,6 +2,7 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,8 +14,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Switch;
 
 /**
@@ -44,6 +47,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     @Override
+    public void onTextInput(String text){
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.textOn(text);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
 
 
@@ -62,7 +71,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             }
             case TEXT: {
 
-                break;
+                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //canvasFragment.textOn();
+                //break;
             }
             default:
                 break;
@@ -90,18 +101,19 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         Intent intent = new Intent(mContext, MainActivity.class);
         intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
         startActivity(intent);
+        finish();
 
     }
 
     @Override
     public void onShare() {
-        Bitmap mBitmap;
+     /*   Bitmap mBitmap;
         String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap,"title", null);
         Uri bmpUri = Uri.parse(pathofBmp);
         final Intent emailIntent1 = new Intent(     android.content.Intent.ACTION_SEND);
         emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        emailIntent1.setType("image/png");
+        emailIntent1.setType("image/png");*/
     }
 
     @Override

@@ -4,4 +4,6 @@
     <string name="existing_pic_button">Open Existing Picture</string>
     <string name="send_report"> Send Report Via...</string>
     <string name="sticker_picker_title">Pick a sticker</string>
+    <string name="text_input_hint">Enter Text Here</string>
+    <string name="text_input_title">Enter Text To Draw</string>
 </resources>

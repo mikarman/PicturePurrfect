@@ -6,16 +6,22 @@ import android.content.Intent;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -102,6 +108,10 @@ public class CanvasFragment extends Fragment{
         mCanvasView.clearStickers();
     }
 
+    public void textOn(String text){
+        mCanvasView.setTextOn(text);
+    }
+
 
     public void saveImage() {
         Bitmap bitmap = mCanvasView.getDrawingCache();
@@ -111,4 +121,6 @@ public class CanvasFragment extends Fragment{
         mCanvasView.destroyDrawingCache();
 
   }
-}
+    }
+
+
