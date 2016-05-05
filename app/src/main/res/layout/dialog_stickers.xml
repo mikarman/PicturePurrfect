@@ -4,43 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="3"
-    android:rowCount="2">
+    android:rowCount="2"
+    android:paddingLeft="20dp">
 
     <ImageButton
         android:id="@+id/sticker_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/cat"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/cat"
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/sticker_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/heart"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/heart"
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/sticker_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/paws"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/paws"
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/sticker_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/planet"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/planet"
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/sticker_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/star"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/star"
+        android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/sticker_6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/star_two"/>
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/star_two"
+        android:scaleType="fitCenter"/>
 
 
 </GridLayout>
