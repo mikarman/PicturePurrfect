@@ -19,13 +19,16 @@ import android.widget.ImageButton;
 
 public class StickerPickerFragment extends DialogFragment {
 
-    //Listing 12.9 Calling back to your target
+    /**
+     * Identifier for sticker extra to be passed from dialog box
+     */
     public static final String EXTRA_STICKER = "com.littlegeektoys.www.picturepurrfect.sticker";
 
-    //private static final String ARG_STICKER = "sticker";
+    /**
+     * String to be passed back to caller to specify which sticker to use
+     */
     private String sticker;
 
-    private GridLayout mGridLayout;
 
     public static StickerPickerFragment newInstance(){
         Bundle args = new Bundle();
@@ -33,14 +36,17 @@ public class StickerPickerFragment extends DialogFragment {
         return fragment;
     }
 
+    /**
+     * Creates the sticker picker Dialog box
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_stickers, null);
 
-        //Listing 12.7 Extracting the date and initializing DatePicker
-        mGridLayout = (GridLayout) v.findViewById(R.id.dialog_sticker_picker);
-
+        //OnClickListeners for dialog box sticker buttons
         ImageButton sticker1 = (ImageButton) v.findViewById(R.id.sticker_1);
         sticker1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +126,7 @@ public class StickerPickerFragment extends DialogFragment {
                 sticker = "sticker10";
             }
         });
+
         ImageButton sticker11 = (ImageButton) v.findViewById(R.id.sticker_11);
         sticker11.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +184,11 @@ public class StickerPickerFragment extends DialogFragment {
 
     }
 
+    /**
+     * Sends result of dialog selection back to the caller
+     * @param resultCode
+     * @param sticker
+     */
     private void sendResult(int resultCode, String sticker){
         if(getTargetFragment() == null){
             return;
