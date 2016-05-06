@@ -122,7 +122,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onSwitchFragment(Fragment f) {
-        Log.d(TAG, "OnGoBack");
+        Log.d(TAG, "OnSwitchFragment");
     }
 
     public static Intent newIntent(Context packageContext, Uri pic) {
@@ -149,8 +149,6 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
         fm = getSupportFragmentManager();
         Fragment editorImageFragment = fm.findFragmentById(R.id.canvas_container);
-        //Fragment topMenuFragment = fm.findFragmentById(R.id.top_menu_fragment);
-
 
         // Maybe check if editorImageFragment is not null, then close the fragment, update the fragment?
         if (editorImageFragment == null) {  // if there is no editorImageFragment yet, make new one
@@ -159,9 +157,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             Fragment topMenuFragment = new TopMenuFragment();
             Fragment bottomMenuFragment = new BottomMenuFragment();
             fm.beginTransaction()
-                    .add(R.id.canvas_container, editorImageFragment)
-                    .add(R.id.top_menu_fragment, topMenuFragment)
-                    .add(R.id.bottom_menu_fragment, bottomMenuFragment)
+                    .replace(R.id.canvas_container, editorImageFragment)
+                    .replace(R.id.topScrollView, topMenuFragment)
+                    .replace(R.id.bottomScrollView, bottomMenuFragment)
                     .commit();
         }
 
