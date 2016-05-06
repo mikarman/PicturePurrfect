@@ -98,11 +98,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onReturnMenu() {
-        Intent intent = new Intent(mContext, MainActivity.class);
-        intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
-        startActivity(intent);
         finish();
-
     }
 
     @Override
@@ -127,6 +123,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     }
 
+    // Bottom Menu Callbacks
     @Override
     public void onGoBack() {
         Log.d(TAG, "OnGoBack");
@@ -137,6 +134,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         Log.d(TAG, "OnSwitchFragment");
     }
 
+    // Creating Intent for this EditorActivity
     public static Intent newIntent(Context packageContext, Uri pic) {
         mContext = packageContext;
         Intent intent = new Intent(packageContext, EditorActivity.class);
@@ -144,13 +142,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
         return intent;
     }
-/*
-    protected Fragment createFragment() {
-        return new EditorImageFragment();
-    }
-*/
 
-
+    // EditorActivity Overrides
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
