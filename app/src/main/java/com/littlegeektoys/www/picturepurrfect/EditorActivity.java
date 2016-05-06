@@ -81,6 +81,10 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     // Top Menu callbacks implementation
+
+    /**
+     * Checks for write permissions and then calls the saveImage method in the CanvasFragment
+     */
     @Override
     public void onSave() {
         CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
