@@ -181,7 +181,7 @@ public class CanvasView extends View {
                             stickers.add(new Sticker(icon, e.getX(), e.getY()));
                             break;
                         case "sticker11":
-                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.dog);
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.question);
                             stickers.add(new Sticker(icon, e.getX(), e.getY()));
                             break;
                         case "sticker12":
