@@ -109,9 +109,7 @@ public class BottomMenuFragment extends Fragment {
                 ColorPickerFragment dialog = ColorPickerFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_COLOR);
                 dialog.show(manager, DIALOG_COLOR_INPUT);
-               // mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
-                //Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
-                //mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
+
             }
 
         });

@@ -20,10 +20,13 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import java.io.File;
+
 /**
  * Created by Michael Karman on 4/10/2016.
  */
-public class EditorActivity extends AppCompatActivity implements MenuToolInterface, TopMenuFragment.TopMenuCallback {
+public class EditorActivity extends AppCompatActivity implements MenuToolInterface, TopMenuFragment.TopMenuCallback,
+        CanvasView.CanvasCallback {
 
     /* Not used
     private static final String EXTRA_PIC_ID =
@@ -41,6 +44,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     private FragmentManager fm;
     public static Context mContext;
 
+
+    // Bottom menu callbacks
     @Override
     public void onStickerSelect(String sticker){
         CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
@@ -61,34 +66,10 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onToolSelect(ToolName tool) {
-
-
-        switch (tool) {
-            case COLOR: {
-                if (fm != null) {
-                    CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                  //  canvasFragment.changeColor();
-                }
-                break;
-            }
-            case STICKER: {
-                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                //canvasFragment.stickerOn();
-                break;
-            }
-            case TEXT: {
-
-                //CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                //canvasFragment.textOn();
-                //break;
-            }
-            default:
-                break;
-        }
+        return; // Unused on this version of the app
     }
 
     // Top Menu callbacks implementation
-
     /**
      * Checks for write permissions and then calls the saveImage method in the CanvasFragment
      */
@@ -124,10 +105,16 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onRetake() {
+        FileMetadata mFile = new FileMetadata();
+        File mPhotoFile = FileLab.get(this).getPhotoFile(mFile);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         PackageManager pm = getPackageManager();
-        if (captureImage.resolveActivity(pm) != null) {
+        boolean canTakePhoto = mPhotoFile != null &&
+                captureImage.resolveActivity(pm) != null;
+        if (canTakePhoto) {
+            photo = Uri.fromFile(mPhotoFile);
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photo);
+            Log.d(TAG, "URI photo " + photo.toString());
             startActivityForResult(captureImage, REQUEST_PHOTO);
         }
 
@@ -142,6 +129,14 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     @Override
     public void onSwitchFragment(Fragment f) {
         Log.d(TAG, "OnSwitchFragment");
+    }
+
+    /**
+     * Implement CanvasView callback to hide/unhide menus in hosting activity
+     */
+    @Override
+    public void hideMenu() {
+        hideUnhide();
     }
 
     // Creating Intent for this EditorActivity
@@ -166,9 +161,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         fm = getSupportFragmentManager();
         Fragment editorImageFragment = fm.findFragmentById(R.id.canvas_container);
 
-        // Maybe check if editorImageFragment is not null, then close the fragment, update the fragment?
         if (editorImageFragment == null) {  // if there is no editorImageFragment yet, make new one
-            //editorImageFragment = new EditorImageFragment();
             editorImageFragment = new CanvasFragment(); //Note that this is CanvasFragment, must merge CanvasFragment with EditorImageFragment!!!!!!
             Fragment topMenuFragment = new TopMenuFragment();
             Fragment bottomMenuFragment = new BottomMenuFragment();
@@ -178,8 +171,6 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                     .replace(R.id.bottomScrollView, bottomMenuFragment)
                     .commit();
         }
-
-        // find view and implement touch event
     }
 
     public Uri getPhoto() { return photo; }
@@ -191,13 +182,35 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         // Request Code from Camera
         if (requestCode == REQUEST_PHOTO) {
             // Make sure the request was successful
+            Log.d(TAG, "Retake Result");
             if (resultCode == RESULT_OK) {
+                Log.d(TAG, "Retake Result OK");
                 canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
                 //Clear sticker
                 canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();
             }
         }
-        super.onActivityResult(requestCode, resultCode, data); // test
+        super.onActivityResult(requestCode, resultCode, data);
     }
+
+    // Function for hiding and unhiding menus
+    public void hideUnhide() {
+        if (fm != null) {
+            Fragment topMenu = fm.findFragmentById(R.id.topScrollView);
+            Fragment bottomMenu = fm.findFragmentById(R.id.bottomScrollView);
+            if (topMenu.isDetached() || bottomMenu.isDetached()) {
+                fm.beginTransaction()
+                        .attach(topMenu)
+                        .attach(bottomMenu)
+                        .commit();
+            } else {
+                fm.beginTransaction()
+                        .detach(topMenu)
+                        .detach(bottomMenu)
+                        .commit();
+            }
+        }
+    }
+
 }

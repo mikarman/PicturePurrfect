@@ -81,12 +81,10 @@ public class MainActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GRAB_PHOTO);
             }
         } else {
-            Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, GRAB_PHOTO);
         }
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = EditorActivity.newIntent(this, absUri);
             startActivity(intent);
         }
-        super.onActivityResult(requestCode, resultCode, data); //Check if this causes bugs
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

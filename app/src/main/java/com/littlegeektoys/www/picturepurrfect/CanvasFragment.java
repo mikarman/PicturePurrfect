@@ -33,7 +33,7 @@ import java.io.File;
 /**
  * Created by Jesse DeMott on 4/22/2016.
  */
-public class CanvasFragment extends Fragment{
+public class CanvasFragment extends Fragment {
     /**
      * TAG used for logs
      */
@@ -139,14 +139,6 @@ public class CanvasFragment extends Fragment{
     public void stickerOn(String sticker){
        mCanvasView.setStickerOn(sticker);
     }
-
-/*    public void saveImage() {
-        Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
-                Toast.LENGTH_LONG).show();
-
-        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
-    }*/
-
 
     /**
      * Clears all sticker from the CanvasView
