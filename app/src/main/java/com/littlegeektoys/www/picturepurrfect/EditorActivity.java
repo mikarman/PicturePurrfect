@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     private Uri photo;
     private FragmentManager fm;
+    public static Context mContext;
 
     @Override
     public void onStickerSelect(String sticker){
@@ -96,12 +98,22 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onReturnMenu() {
+        Intent intent = new Intent(mContext, MainActivity.class);
+        intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
+        startActivity(intent);
+        finish();
 
     }
 
     @Override
     public void onShare() {
-
+     /*   Bitmap mBitmap;
+        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap,"title", null);
+        Uri bmpUri = Uri.parse(pathofBmp);
+        final Intent emailIntent1 = new Intent(     android.content.Intent.ACTION_SEND);
+        emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
+        emailIntent1.setType("image/png");*/
     }
 
     @Override
@@ -126,6 +138,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     public static Intent newIntent(Context packageContext, Uri pic) {
+        mContext = packageContext;
         Intent intent = new Intent(packageContext, EditorActivity.class);
         intent.setData(pic);
         intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);

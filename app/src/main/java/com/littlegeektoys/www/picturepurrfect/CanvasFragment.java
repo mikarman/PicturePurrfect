@@ -1,11 +1,17 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.content.Intent;
+
+
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -21,8 +27,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 
 /**
  * Created by Jesse DeMott on 4/22/2016.
@@ -80,7 +86,7 @@ public class CanvasFragment extends Fragment{
     }
 
     public void changeColor (){
-        mBitmap = mCanvasView.toGrayscale(mBitmap);
+        mBitmap = mCanvasView.toBlue(mBitmap);
         mCanvasView.setImage(mBitmap);
         mCanvasView.invalidate();
         Log.d(TAG, "changeColor");
@@ -89,6 +95,14 @@ public class CanvasFragment extends Fragment{
     public void stickerOn(String sticker){
        mCanvasView.setStickerOn(sticker);
     }
+
+/*    public void saveImage() {
+        Toast.makeText(getActivity(), "This will save the image, being called from CanvasFragment",
+                Toast.LENGTH_LONG).show();
+
+        MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), mBitmap, "image", "image taken in picture purrfect");
+    }*/
+
 
     public void clearStickers(){
         mCanvasView.clearStickers();
@@ -106,6 +120,7 @@ public class CanvasFragment extends Fragment{
             MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
         mCanvasView.destroyDrawingCache();
 
+  }
     }
 
-}
+
