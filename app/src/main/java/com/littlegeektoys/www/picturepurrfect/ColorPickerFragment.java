@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 public class ColorPickerFragment extends DialogFragment {
 
     private GridLayout mGridLayout;
-    public static final String EXTRA_COLOR = "com.littlegeektoys.www.picturepurrfect.sticker";
+    public static final String EXTRA_COLOR = "com.littlegeektoys.www.picturepurrfect.color";
     private String color;
     public static ColorPickerFragment newInstance(){
         Bundle args = new Bundle();

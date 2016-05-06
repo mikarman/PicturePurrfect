@@ -49,6 +49,11 @@ public class CanvasFragment extends Fragment{
     /**
      * Fragments Hosting activity
      */
+
+    private Bitmap mBitmapOriginal;
+    /**
+     * Fragments Hosting activity
+     */
     private EditorActivity mHostingActivity;
     /**
      * Image File received from camera or gallery before being turned into a Bitmap
@@ -89,10 +94,10 @@ public class CanvasFragment extends Fragment{
         } else {
             mBitmap = PictureUtils.getScaledBitmap(
                     mPhotoFile.getPath(), mHostingActivity);
+            mBitmapOriginal = mBitmap;
         }
 
         mCanvasView.setImage(mBitmap);
-
         return v;
     }
 
@@ -111,21 +116,12 @@ public class CanvasFragment extends Fragment{
 
     public void changeColor (String color) {
         if (color.equals("color1")) {
-            mBitmap = mCanvasView.toBlue(mBitmap);
+            mBitmap = mCanvasView.toBlue(mBitmapOriginal);
         } else if (color.equals("color2")) {
-            mBitmap = mCanvasView.toGrayscale(mBitmap);
-        } else {
-            mCanvasView.setImage(mBitmap);
+            mBitmap = mCanvasView.toGrayscale(mBitmapOriginal);
         }
-    }
-    /**
-     * Preforms the Color Change operation on the Bitmap being edited in the CanvasView
-     */
-    public void changeColor (){
-        mBitmap = mCanvasView.toBlue(mBitmap);
         mCanvasView.setImage(mBitmap);
-        mCanvasView.invalidate();
-        Log.d(TAG, "changeColor");
+
     }
 
     /**

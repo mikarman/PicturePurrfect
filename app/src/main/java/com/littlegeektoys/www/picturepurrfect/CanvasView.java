@@ -28,6 +28,7 @@ import java.util.ArrayList;
  * CanvasView contains the canvas that is used to draw the new bitmap.
  */
 public class CanvasView extends View {
+
     /**
      * Bitmap passed from the camera or gallery
      */
@@ -49,11 +50,21 @@ public class CanvasView extends View {
      */
     private boolean textOn = false;
     /**
-     * Current sticker being drawn
+     * Flag that the bitmap has the blue night filter on.
+     */
+    private boolean isBlue = false;
+
+    /**
+     * Flag that the bitmap has the grayscale filter on.
+     */
+    private boolean isGrayScale = false;
+
+    /**
+     * Current color being drawn
      */
     private String color;
     /**
-     * Current color being drawn
+     * Current sticker being drawn
      */
     private String sticker;
     /**
@@ -113,7 +124,9 @@ public class CanvasView extends View {
      */
     public void setImage(Bitmap image){
         mImage = image;
+        invalidate();
     }
+
 
     /**
      * onTouchEvent used to draw stickers and text on canvas
