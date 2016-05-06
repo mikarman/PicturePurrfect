@@ -169,6 +169,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                     .commit();
         }
 
+        // find view and implement touch event
     }
 
     public Uri getPhoto() { return photo; }
