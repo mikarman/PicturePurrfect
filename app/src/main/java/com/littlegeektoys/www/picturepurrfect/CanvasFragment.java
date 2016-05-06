@@ -120,6 +120,8 @@ public class CanvasFragment extends Fragment{
         } else if (color.equals("color2")) {
 
             mBitmap = mCanvasView.toGrayscale(mBitmapOriginal);
+        } else if(color.equals("color3")){
+            mBitmap = mBitmapOriginal;
         }
         mCanvasView.setImage(mBitmap);
 

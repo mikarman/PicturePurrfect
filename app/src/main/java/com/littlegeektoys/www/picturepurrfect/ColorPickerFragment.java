@@ -50,6 +50,14 @@ public class ColorPickerFragment extends DialogFragment {
             }
         });
 
+        ImageButton color3 = (ImageButton) v.findViewById(R.id.color_3);
+        color3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                color = "color3";
+            }
+        });
+
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.color_picker_title)

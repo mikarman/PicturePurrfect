@@ -3,8 +3,8 @@
             android:id="@+id/dialog_color"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:columnCount="5"
-            android:rowCount="3"
+            android:columnCount="3"
+            android:rowCount="1"
             android:paddingLeft="5dp">
 
     <ImageButton
@@ -19,6 +19,13 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/color_bw"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/color_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/color"
         android:scaleType="fitCenter"/>
 
 
