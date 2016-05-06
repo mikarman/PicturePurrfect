@@ -109,6 +109,7 @@ public class CanvasFragment extends Fragment{
         if (mPhotoFile != null || mPhotoFile.exists()) {
             mBitmap = PictureUtils.getScaledBitmap(
                     mPhotoFile.getPath(), mHostingActivity);
+            mBitmapOriginal = mBitmap;
             mCanvasView.setImage(mBitmap);
             mCanvasView.invalidate();
         }

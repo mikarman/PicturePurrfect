@@ -192,7 +192,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                //Clear stickers
+                //Clear sticker
                 canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();
             }
