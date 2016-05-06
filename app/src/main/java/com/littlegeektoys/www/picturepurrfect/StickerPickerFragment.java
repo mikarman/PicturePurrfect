@@ -89,6 +89,80 @@ public class StickerPickerFragment extends DialogFragment {
             }
         });
 
+        ImageButton sticker7 = (ImageButton) v.findViewById(R.id.sticker_7);
+        sticker7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker7";
+            }
+        });
+
+        ImageButton sticker8 = (ImageButton) v.findViewById(R.id.sticker_8);
+        sticker8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker8";
+            }
+        });
+
+        ImageButton sticker9 = (ImageButton) v.findViewById(R.id.sticker_9);
+        sticker9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker9";
+            }
+        });
+
+        ImageButton sticker10 = (ImageButton) v.findViewById(R.id.sticker_10);
+        sticker10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker10";
+            }
+        });
+        ImageButton sticker11 = (ImageButton) v.findViewById(R.id.sticker_11);
+        sticker11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker11";
+            }
+        });
+
+        ImageButton sticker12 = (ImageButton) v.findViewById(R.id.sticker_12);
+        sticker12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker12";
+            }
+        });
+
+        ImageButton sticker13 = (ImageButton) v.findViewById(R.id.sticker_13);
+        sticker13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker13";
+            }
+        });
+
+
+        ImageButton sticker14 = (ImageButton) v.findViewById(R.id.sticker_14);
+        sticker14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker14";
+            }
+        });
+
+        ImageButton sticker15 = (ImageButton) v.findViewById(R.id.sticker_15);
+        sticker15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sticker = "sticker15";
+            }
+        });
+
+
+
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.sticker_picker_title)

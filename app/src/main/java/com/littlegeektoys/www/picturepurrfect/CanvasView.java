@@ -147,6 +147,42 @@ public class CanvasView extends View {
                             icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.star_two);
                             stickers.add(new Sticker(icon, e.getX(), e.getY()));
                             break;
+                        case "sticker7":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.panda);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker8":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.bunny);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker9":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.butterfly);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker10":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hearts);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker11":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.dog);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker12":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.pig);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker13":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.stars);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker14":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.green);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker15":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.omg);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
                         default:
                             break;
                     }
