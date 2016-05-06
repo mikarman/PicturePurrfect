@@ -32,6 +32,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     private static final String TAG = "EditorActivity";
     private static final int REQUEST_PHOTO = 0;
+    private CanvasFragment canvasFragment;
 
     private static final String CLOSE_HOSTING_ACTIVITY =
             "com.littlegeektoys.www.picturepurrfect.close_hosting_activity_boolean";
@@ -113,10 +114,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onShare() {
-     /*   Bitmap mBitmap;
-        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap,"title", null);
+/*        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), canvasFragment.getBitmap() ,"title", null);
         Uri bmpUri = Uri.parse(pathofBmp);
-        final Intent emailIntent1 = new Intent(     android.content.Intent.ACTION_SEND);
+        final Intent emailIntent1 = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
         emailIntent1.setType("image/png");*/
@@ -191,7 +191,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         if (requestCode == REQUEST_PHOTO) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
                 //Clear sticker
                 canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();

@@ -67,6 +67,10 @@ public class CanvasFragment extends Fragment{
 
     }
 
+    public Bitmap getBitmap() {
+        return mBitmap;
+    }
+
     /**
      * Creates CanvasView to be housed in the fragment
      * @param inflater

@@ -2,6 +2,7 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,6 +13,8 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,7 +36,13 @@ public class CanvasView extends View {
      * Bitmap passed from the camera or gallery
      */
     private Bitmap mImage;
+
+    public Bitmap getImage() {
+        return mImage;
+    }
+
     /**
+
      * Width of canvas
      */
     private int mCanvasWidth;
