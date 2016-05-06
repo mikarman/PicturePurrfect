@@ -1,9 +1,14 @@
 package com.littlegeektoys.www.picturepurrfect;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +22,8 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final int REQUEST_PHOTO = 0;
+    private static final int TAKE_PHOTO = 0;
+    private static final int GRAB_PHOTO = 1;
 
     private ImageButton mTakePhotoButton;
     private ImageButton mExistingPhotoButton;
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTitle = (ImageView) findViewById(R.id.Title);
 
-        PackageManager packageManager = getPackageManager();
+        final PackageManager packageManager = getPackageManager();
         mFile = new FileMetadata();
         mPhotoFile = FileLab.get(this).getPhotoFile(mFile);
 
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mTakePhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(captureImage, REQUEST_PHOTO);
+                startActivityForResult(captureImage, TAKE_PHOTO);
             }
 
         });
@@ -63,38 +69,41 @@ public class MainActivity extends AppCompatActivity {
         mExistingPhotoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_PHOTO);
+                getImageFromGallery();
             }
 
         });
 
     }
 
+    public void getImageFromGallery(){
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, GRAB_PHOTO);
+            }
+        } else {
+            Toast.makeText(getBaseContext(), "Later the user will be able to select an image from the gallery to edit", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, GRAB_PHOTO);
+        }
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() called");
-
-        /* Testing purpose, set title image to photo
-        if (mPhotoFile == null || !mPhotoFile.exists()) {
-            mTitle.setImageDrawable(null);
-            Toast.makeText(this, "no image :(", Toast.LENGTH_LONG).show();
-        } else {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(
-                    mPhotoFile.getPath(), this);
-            mTitle.setImageBitmap(bitmap);
-        }
-        */
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
         // Check which request we're responding to
         // Request Code from Camera
-        if (requestCode == REQUEST_PHOTO) {
+        if (requestCode == TAKE_PHOTO) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 Uri photo = Uri.fromFile(mPhotoFile);
@@ -103,6 +112,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+        else if (requestCode == GRAB_PHOTO) {
+            Uri relativeUri = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(relativeUri, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String absPath = cursor.getString(columnIndex);
+            cursor.close();
+            Uri absUri = Uri.parse(absPath);
+            Intent intent = EditorActivity.newIntent(this, absUri);
+            startActivity(intent);
+        }
+        super.onActivityResult(requestCode, resultCode, data); //Check if this causes bugs
     }
 
 }

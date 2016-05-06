@@ -240,6 +240,7 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
+<<<<<<< HEAD
     public static Bitmap bw(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 0.5;   // We can change these
@@ -277,7 +278,7 @@ public class CanvasView extends View {
         }
         return bwBitmap;
     }
-
+    
     public static Bitmap color(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 2.0;   // We can change these

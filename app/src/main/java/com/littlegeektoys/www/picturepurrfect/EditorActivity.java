@@ -98,11 +98,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onReturnMenu() {
-        Intent intent = new Intent(mContext, MainActivity.class);
-        intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
-        startActivity(intent);
         finish();
-
     }
 
     @Override
@@ -127,6 +123,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     }
 
+    // Bottom Menu Callbacks
     @Override
     public void onGoBack() {
         Log.d(TAG, "OnGoBack");
@@ -134,9 +131,10 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onSwitchFragment(Fragment f) {
-        Log.d(TAG, "OnGoBack");
+        Log.d(TAG, "OnSwitchFragment");
     }
 
+    // Creating Intent for this EditorActivity
     public static Intent newIntent(Context packageContext, Uri pic) {
         mContext = packageContext;
         Intent intent = new Intent(packageContext, EditorActivity.class);
@@ -144,13 +142,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         intent.putExtra(CLOSE_HOSTING_ACTIVITY, true);
         return intent;
     }
-/*
-    protected Fragment createFragment() {
-        return new EditorImageFragment();
-    }
-*/
 
-
+    // EditorActivity Overrides
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,8 +155,6 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
         fm = getSupportFragmentManager();
         Fragment editorImageFragment = fm.findFragmentById(R.id.canvas_container);
-        //Fragment topMenuFragment = fm.findFragmentById(R.id.top_menu_fragment);
-
 
         // Maybe check if editorImageFragment is not null, then close the fragment, update the fragment?
         if (editorImageFragment == null) {  // if there is no editorImageFragment yet, make new one
@@ -172,9 +163,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             Fragment topMenuFragment = new TopMenuFragment();
             Fragment bottomMenuFragment = new BottomMenuFragment();
             fm.beginTransaction()
-                    .add(R.id.canvas_container, editorImageFragment)
-                    .add(R.id.top_menu_fragment, topMenuFragment)
-                    .add(R.id.bottom_menu_fragment, bottomMenuFragment)
+                    .replace(R.id.canvas_container, editorImageFragment)
+                    .replace(R.id.topScrollView, topMenuFragment)
+                    .replace(R.id.bottomScrollView, bottomMenuFragment)
                     .commit();
         }
 
