@@ -51,6 +51,10 @@ public class CanvasView extends View {
     /**
      * Current sticker being drawn
      */
+    private String color;
+    /**
+     * Current color being drawn
+     */
     private String sticker;
     /**
      * Current text being drawn
@@ -327,6 +331,10 @@ public class CanvasView extends View {
         stickerOn = true;
         textOn = false;
         this.sticker = sticker;
+    }
+
+    public void setColor(String color){
+        this.color = color;
     }
 
     /**

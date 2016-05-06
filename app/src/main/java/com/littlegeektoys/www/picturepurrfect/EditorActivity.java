@@ -53,6 +53,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     @Override
+    public void onColorSelect(String color) {
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.changeColor(color);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
 
 
@@ -60,7 +66,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             case COLOR: {
                 if (fm != null) {
                     CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                    canvasFragment.changeColor();
+                  //  canvasFragment.changeColor();
                 }
                 break;
             }

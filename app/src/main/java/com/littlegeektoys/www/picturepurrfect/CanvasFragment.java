@@ -85,8 +85,16 @@ public class CanvasFragment extends Fragment{
         }
     }
 
-    public void changeColor (){
-        mBitmap = mCanvasView.toBlue(mBitmap);
+    public void changeColor (String color){
+        if(color.equals("color1")) {
+            mBitmap = mCanvasView.toBlue(mBitmap);
+        }
+        else if (color.equals("color2")) {
+            mBitmap = mCanvasView.toGrayscale(mBitmap);
+        }
+        else {
+            mCanvasView.setImage(mBitmap);
+        }
         mCanvasView.setImage(mBitmap);
         mCanvasView.invalidate();
         Log.d(TAG, "changeColor");
@@ -111,6 +119,8 @@ public class CanvasFragment extends Fragment{
     public void textOn(String text){
         mCanvasView.setTextOn(text);
     }
+
+
 
 
     public void saveImage() {

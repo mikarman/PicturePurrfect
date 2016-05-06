@@ -16,6 +16,8 @@ public interface MenuToolInterface {
 
     void onTextInput(String text);
 
+    void onColorSelect(String color);
+
     void onGoBack();
 
     void onSwitchFragment(Fragment fragment);
