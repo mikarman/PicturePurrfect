@@ -256,7 +256,7 @@ public class CanvasView extends View {
         Paint paint = new Paint();
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(0);
-        ColorFilter filter = new LightingColorFilter(100, 1);
+        ColorFilter filter = new LightingColorFilter(175, 1);
         paint.setColorFilter(filter);
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         return bmpGrayscale;
