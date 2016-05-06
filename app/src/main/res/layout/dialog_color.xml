@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/dialog_color"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:columnCount="3"
+            android:rowCount="1"
+            android:paddingLeft="5dp">
+
+    <ImageButton
+        android:id="@+id/color_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/blue"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/color_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/color_bw"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/color_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/color_original"
+        android:scaleType="fitCenter"/>
+
+
+</GridLayout>

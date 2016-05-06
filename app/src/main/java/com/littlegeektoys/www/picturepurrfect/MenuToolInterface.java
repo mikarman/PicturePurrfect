@@ -12,9 +12,19 @@ public interface MenuToolInterface {
 
     void onToolSelect(ToolName tool);
 
+    /**
+     * Callback for sticker selection
+     * @param sticker
+     */
     void onStickerSelect(String sticker);
 
+    /**
+     * Callback for text sticker input
+     * @param text
+     */
     void onTextInput(String text);
+
+    void onColorSelect(String color);
 
     void onGoBack();
 

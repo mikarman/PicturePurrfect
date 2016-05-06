@@ -2,6 +2,7 @@ package com.littlegeektoys.www.picturepurrfect;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,6 +13,8 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,11 +31,18 @@ import java.util.ArrayList;
  * CanvasView contains the canvas that is used to draw the new bitmap.
  */
 public class CanvasView extends View {
+
     /**
      * Bitmap passed from the camera or gallery
      */
     private Bitmap mImage;
+
+    public Bitmap getImage() {
+        return mImage;
+    }
+
     /**
+
      * Width of canvas
      */
     private int mCanvasWidth;
@@ -48,6 +58,20 @@ public class CanvasView extends View {
      * Flag that for text tool
      */
     private boolean textOn = false;
+    /**
+     * Flag that the bitmap has the blue night filter on.
+     */
+    private boolean isBlue = false;
+
+    /**
+     * Flag that the bitmap has the grayscale filter on.
+     */
+    private boolean isGrayScale = false;
+
+    /**
+     * Current color being drawn
+     */
+    private String color;
     /**
      * Current sticker being drawn
      */
@@ -109,7 +133,9 @@ public class CanvasView extends View {
      */
     public void setImage(Bitmap image){
         mImage = image;
+        invalidate();
     }
+
 
     /**
      * onTouchEvent used to draw stickers and text on canvas
@@ -145,6 +171,42 @@ public class CanvasView extends View {
                             break;
                         case "sticker6":
                             icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.star_two);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker7":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.panda);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker8":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.bunny);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker9":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.butterfly);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker10":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.hearts);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker11":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.question);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker12":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.pig);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker13":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.stars);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker14":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.green);
+                            stickers.add(new Sticker(icon, e.getX(), e.getY()));
+                            break;
+                        case "sticker15":
+                            icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.omg);
                             stickers.add(new Sticker(icon, e.getX(), e.getY()));
                             break;
                         default:
@@ -188,6 +250,11 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
+    /**
+     * Overlays the bitmap being edited with blue
+     * @param bmpOriginal
+     * @return
+     */
     public Bitmap toBlue(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
@@ -198,12 +265,15 @@ public class CanvasView extends View {
         Paint paint = new Paint();
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(0);
-        ColorFilter filter = new LightingColorFilter(100, 1);
+        ColorFilter filter = new LightingColorFilter(175, 1);
         paint.setColorFilter(filter);
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         return bmpGrayscale;
     }
 
+    /**
+        Colors Bitmap being edited
+     */
     public static Bitmap color(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 2.0;   // We can change these
@@ -253,6 +323,10 @@ public class CanvasView extends View {
         stickerOn = true;
         textOn = false;
         this.sticker = sticker;
+    }
+
+    public void setColor(String color){
+        this.color = color;
     }
 
     /**

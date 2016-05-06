@@ -22,8 +22,10 @@ public class BottomMenuFragment extends Fragment {
 
     private static final String DIALOG_STICKER = "DialogSticker";
     private static final String DIALOG_TEXT_INPUT = "DialogTextInput";
+    private static final String DIALOG_COLOR_INPUT = "DialogColorInput";
     private static final int REQUEST_STICKER = 0;
     private static final int REQUEST_TEXT = 1;
+    private static final int REQUEST_COLOR = 2;
 
     private static final String TAG = "TopMenuFragment";
     private ImageButton mStickerButton;
@@ -35,6 +37,7 @@ public class BottomMenuFragment extends Fragment {
     private MenuToolInterface mCallbacks; //Added chapter 17
     private String sticker;
     private String text;
+    private String color = "";
 
     @Override
     public void onAttach(Activity activity){
@@ -66,6 +69,14 @@ public class BottomMenuFragment extends Fragment {
             Log.i("BottomMenuFragment" , text + " input");
             mCallbacks.onTextInput(text);
         }
+
+        if(requestCode == REQUEST_COLOR){
+            color = (String) data.getSerializableExtra(ColorPickerFragment.EXTRA_COLOR);
+            Log.i("BottomMenu COLOR", " " + color + " set");
+            if (color != null) {
+                mCallbacks.onColorSelect(color);
+            }
+        }
     }
 
     @Override
@@ -85,8 +96,6 @@ public class BottomMenuFragment extends Fragment {
                 StickerPickerFragment dialog = StickerPickerFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_STICKER);
                 dialog.show(manager, DIALOG_STICKER);
-
-                //Toast.makeText(getContext(), "This will allow users to put stickers on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -96,8 +105,13 @@ public class BottomMenuFragment extends Fragment {
         mColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
+                FragmentManager manager = getFragmentManager();
+                ColorPickerFragment dialog = ColorPickerFragment.newInstance();
+                dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_COLOR);
+                dialog.show(manager, DIALOG_COLOR_INPUT);
+               // mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
                 //Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
+                //mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
             }
 
         });
@@ -111,8 +125,6 @@ public class BottomMenuFragment extends Fragment {
                 TextInputFragment dialog = TextInputFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_TEXT);
                 dialog.show(manager, DIALOG_TEXT_INPUT);
-                //mCallbacks.onToolSelect(MenuToolInterface.ToolName.TEXT);
-                //Toast.makeText(getContext(), "This will allow users to put text on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });

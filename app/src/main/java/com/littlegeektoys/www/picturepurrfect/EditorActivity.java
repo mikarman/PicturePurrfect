@@ -32,6 +32,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     private static final String TAG = "EditorActivity";
     private static final int REQUEST_PHOTO = 0;
+    private CanvasFragment canvasFragment;
 
     private static final String CLOSE_HOSTING_ACTIVITY =
             "com.littlegeektoys.www.picturepurrfect.close_hosting_activity_boolean";
@@ -53,6 +54,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     @Override
+    public void onColorSelect(String color) {
+        CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+        canvasFragment.changeColor(color);
+    }
+
+    @Override
     public void onToolSelect(ToolName tool) {
 
 
@@ -60,7 +67,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
             case COLOR: {
                 if (fm != null) {
                     CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                    canvasFragment.changeColor();
+                  //  canvasFragment.changeColor();
                 }
                 break;
             }
@@ -81,6 +88,10 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     }
 
     // Top Menu callbacks implementation
+
+    /**
+     * Checks for write permissions and then calls the saveImage method in the CanvasFragment
+     */
     @Override
     public void onSave() {
         CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
@@ -103,10 +114,9 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onShare() {
-     /*   Bitmap mBitmap;
-        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap,"title", null);
+/*        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), canvasFragment.getBitmap() ,"title", null);
         Uri bmpUri = Uri.parse(pathofBmp);
-        final Intent emailIntent1 = new Intent(     android.content.Intent.ACTION_SEND);
+        final Intent emailIntent1 = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
         emailIntent1.setType("image/png");*/
@@ -182,8 +192,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
         if (requestCode == REQUEST_PHOTO) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                CanvasFragment canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
-                //Clear stickers
+                canvasFragment = (CanvasFragment) fm.findFragmentById(R.id.canvas_container);
+                //Clear sticker
                 canvasFragment.clearStickers();
                 canvasFragment.updatePhoto();
             }
