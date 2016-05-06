@@ -188,7 +188,6 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
-<<<<<<< HEAD
     public Bitmap toBlue(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
@@ -200,7 +199,7 @@ public class CanvasView extends View {
         ColorMatrix cm = new ColorMatrix();
         cm.setSaturation(0);
         ColorFilter filter = new LightingColorFilter(100, 1);
-        p.setColorFilter(filter);
+        paint.setColorFilter(filter);
         c.drawBitmap(bmpOriginal, 0, 0, paint);
         return bmpGrayscale;
     }
@@ -243,9 +242,6 @@ public class CanvasView extends View {
         return bwBitmap;
     }
 
-
-=======
->>>>>>> 0915085b020c3eeea78085ae0f2854005f406128
     public static Bitmap color(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 2.0;   // We can change these
