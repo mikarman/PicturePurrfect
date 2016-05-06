@@ -96,8 +96,6 @@ public class BottomMenuFragment extends Fragment {
                 StickerPickerFragment dialog = StickerPickerFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_STICKER);
                 dialog.show(manager, DIALOG_STICKER);
-
-                //Toast.makeText(getContext(), "This will allow users to put stickers on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -107,13 +105,13 @@ public class BottomMenuFragment extends Fragment {
         mColorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FragmentManager manager = getFragmentManager();
                 ColorPickerFragment dialog = ColorPickerFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_COLOR);
                 dialog.show(manager, DIALOG_COLOR_INPUT);
                // mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
                 //Toast.makeText(getContext(), "This will allow users to change the color of the picture they are editing", Toast.LENGTH_LONG).show();
+                mCallbacks.onToolSelect(MenuToolInterface.ToolName.COLOR);
             }
 
         });
@@ -127,8 +125,6 @@ public class BottomMenuFragment extends Fragment {
                 TextInputFragment dialog = TextInputFragment.newInstance();
                 dialog.setTargetFragment(BottomMenuFragment.this, REQUEST_TEXT);
                 dialog.show(manager, DIALOG_TEXT_INPUT);
-                //mCallbacks.onToolSelect(MenuToolInterface.ToolName.TEXT);
-                //Toast.makeText(getContext(), "This will allow users to put text on the picture they are editing", Toast.LENGTH_LONG).show();
             }
 
         });

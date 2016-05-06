@@ -228,6 +228,11 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
+    /**
+     * Overlays the bitmap being edited with blue
+     * @param bmpOriginal
+     * @return
+     */
     public Bitmap toBlue(Bitmap bmpOriginal) {
         int width, height;
         height = bmpOriginal.getHeight();
@@ -244,44 +249,9 @@ public class CanvasView extends View {
         return bmpGrayscale;
     }
 
-    public static Bitmap bw(Bitmap image) {
-        // This function turns a bitmap to black and white
-        double red = 0.5;   // We can change these
-        double green = 0.5;
-        double blue = 1.5;
-        int width = image.getWidth();
-        int height = image.getHeight();
-        Bitmap bwBitmap = Bitmap.createBitmap(width, height, image.getConfig());
-        double SCALE = 0.25;
-        int A, R, G, B;
-        int pixel;
-
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                pixel = image.getPixel(i, j);
-                A = Color.alpha(pixel);
-                R = Color.red(pixel);
-                G = Color.green(pixel);
-                B = Color.blue(pixel);
-                B = G = R = (int) (SCALE * R + SCALE * G + SCALE * B);
-                R += (red);
-                if (R > 255) {
-                    R = 255;
-                }
-                G += (green);
-                if (G > 255) {
-                    G = 255;
-                }
-                B += (blue);
-                if (B > 255) {
-                    B = 255;
-                }
-                bwBitmap.setPixel(i, j, Color.argb(A, R, G, B));
-            }
-        }
-        return bwBitmap;
-    }
-
+    /**
+        Colors Bitmap being edited
+     */
     public static Bitmap color(Bitmap image) {
         // This function turns a bitmap to black and white
         double red = 2.0;   // We can change these

@@ -53,7 +53,6 @@ public class TopMenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mCallbacks.onSave();
-                Toast.makeText(getContext(), "This will allow users to save the picture to their photo gallery after the y are done editing.", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -63,7 +62,6 @@ public class TopMenuFragment extends Fragment {
         mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(), "This will take the user back to the main menu", Toast.LENGTH_LONG).show();
                 mCallbacks.onReturnMenu();
             }
 
@@ -74,7 +72,6 @@ public class TopMenuFragment extends Fragment {
         mShareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This will allow the user to share there picture through email and social media", Toast.LENGTH_LONG).show();
                 mCallbacks.onShare();
             }
 
@@ -85,7 +82,6 @@ public class TopMenuFragment extends Fragment {
         mRetakeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This will allow the user to take a new picture.", Toast.LENGTH_LONG).show();
                 mCallbacks.onRetake();
             }
 

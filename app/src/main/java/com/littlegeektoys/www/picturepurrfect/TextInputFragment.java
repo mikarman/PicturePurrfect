@@ -11,38 +11,40 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextClock;
 
 /**
  * Created by Jesse DeMott on 5/5/16.
  */
 
-
 public class TextInputFragment extends DialogFragment {
 
-    //Listing 12.9 Calling back to your target
+    /**
+     * Identifier for text extra to be passed back to caller
+     */
     public static final String EXTRA_TEXT = "com.littlegeektoys.www.picturepurrfect.text";
 
-    //private static final String ARG_STICKER = "sticker";
+    /**
+     * String to be returned to the Dialog caller to be used for creating a text sticker.
+     */
     private String text;
 
-    private LinearLayout mLinearLayout;
-
+    /**
+     * Create the TextInputFragment
+     */
     public static TextInputFragment newInstance(){
         TextInputFragment fragment = new TextInputFragment();
         return fragment;
     }
 
+    /**
+     * Creates Dialog box with text field
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
 
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_text_input, null);
-
-        //Listing 12.7 Extracting the date and initializing DatePicker
-        mLinearLayout = (LinearLayout) v.findViewById(R.id.dialog_text_input);
         final EditText mEditText = (EditText) v.findViewById(R.id.text_input);
 
         return new AlertDialog.Builder(getActivity())
@@ -60,6 +62,11 @@ public class TextInputFragment extends DialogFragment {
 
     }
 
+    /**
+     * Returns text input back to the caller
+     * @param resultCode
+     * @param text
+     */
     private void sendResult(int resultCode, String text){
         if(getTargetFragment() == null){
             return;
