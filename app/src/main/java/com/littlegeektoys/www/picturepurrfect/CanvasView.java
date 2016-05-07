@@ -154,6 +154,9 @@ public class CanvasView extends View {
     public boolean onTouchEvent(MotionEvent e) {
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_POINTER_DOWN:
+                if (!stickers.isEmpty()) {
+                    stickers.remove(stickers.size() - 1);
+                }
                 mCallback.hideMenu();
                 break;
             case MotionEvent.ACTION_DOWN:

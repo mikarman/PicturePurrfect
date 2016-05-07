@@ -215,6 +215,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                         .detach(bottomMenu)
                         .commit();
             }
+
             Toast.makeText(this, "Tap with 2 fingers to Hide/Unhide Menus", Toast.LENGTH_SHORT).show();
         }
     }
