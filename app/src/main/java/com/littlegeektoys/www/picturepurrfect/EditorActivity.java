@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -98,12 +99,12 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     @Override
     public void onShare() {
         onSave();
-        final Intent emailIntent1 = new Intent(android.content.Intent.ACTION_SEND);
-        emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        emailIntent1.putExtra(Intent.EXTRA_STREAM, savedImageUri);
-        emailIntent1.setType("image/png");
-        Intent.createChooser(emailIntent1, getString(R.string.send_report));
-        startActivity(emailIntent1);
+        final Intent i = new Intent(android.content.Intent.ACTION_SEND);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra(Intent.EXTRA_STREAM, savedImageUri);
+        i.setType("image/png");
+        Intent.createChooser(i, getString(R.string.send_report));
+        startActivity(i);
 
     }
 
@@ -214,6 +215,7 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                         .detach(bottomMenu)
                         .commit();
             }
+            Toast.makeText(this, "Tap with 2 fingers to Hide/Unhide Menus", Toast.LENGTH_SHORT).show();
         }
     }
 
