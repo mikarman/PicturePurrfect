@@ -60,6 +60,7 @@ public class CanvasFragment extends Fragment {
      */
     private File mPhotoFile;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,13 +160,13 @@ public class CanvasFragment extends Fragment {
     /**
      * Saves edited Bitmap to internal storage
      */
-    public void saveImage() {
+    public String saveImage() {
         Bitmap bitmap = mCanvasView.getDrawingCache();
         Toast.makeText(getActivity(), "Saved!",
                     Toast.LENGTH_SHORT).show();
-            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
+         String pathname = MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), bitmap, "image", "image taken in picture purrfect");
         mCanvasView.destroyDrawingCache();
-
+        return pathname;
   }
     }
 

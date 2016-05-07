@@ -44,6 +44,8 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
     private FragmentManager fm;
     public static Context mContext;
 
+    private Uri savedImageUri;
+
 
     // Bottom menu callbacks
     @Override
@@ -81,10 +83,10 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-                canvasFragment.saveImage();
+                savedImageUri = Uri.parse(canvasFragment.saveImage());
             }
         } else {
-            canvasFragment.saveImage();
+            savedImageUri = Uri.parse(canvasFragment.saveImage());
         }
     }
 
@@ -95,12 +97,14 @@ public class EditorActivity extends AppCompatActivity implements MenuToolInterfa
 
     @Override
     public void onShare() {
-/*        String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), canvasFragment.getBitmap() ,"title", null);
-        Uri bmpUri = Uri.parse(pathofBmp);
+        onSave();
         final Intent emailIntent1 = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        emailIntent1.setType("image/png");*/
+        emailIntent1.putExtra(Intent.EXTRA_STREAM, savedImageUri);
+        emailIntent1.setType("image/png");
+        Intent.createChooser(emailIntent1, getString(R.string.send_report));
+        startActivity(emailIntent1);
+
     }
 
     @Override
